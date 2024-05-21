@@ -11,17 +11,19 @@ const Registration = lazy(() => import("./pages/Registration"));
 
 function App() {
     return (
-        <>
+        <div className="view_port_container">
             <NavBar />
-            <Suspense fallback={"Loading..."}>
-                <Routes>
-                    <Route path={PAGES.HOME} element={<Home />} />
-                    <Route path={`/${PAGES.STORE}`} element={<Store />} />
-                    <Route path={`/${PAGES.SIGNIN}`} element={<SignIn />} />
-                    <Route path={`/${PAGES.REGISTRATION}`} element={<Registration />} />
-                </Routes>
-            </Suspense>
-        </>
+            <div className="content_container">
+                <Suspense fallback={"Loading..."}>
+                    <Routes>
+                        <Route path={PAGES.HOME} element={<Home />} />
+                        <Route path={`/${PAGES.STORE}`} element={<Store />} />
+                        <Route path={`/${PAGES.SIGNIN}`} element={<SignIn />} />
+                        <Route path={`/${PAGES.REGISTRATION}`} element={<Registration />} />
+                    </Routes>
+                </Suspense>
+            </div>
+        </div>
     );
 }
 

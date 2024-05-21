@@ -3,6 +3,8 @@ import Form from "../components/reusables/form/Form";
 import ShowIcon from "../assets/icons/view.png";
 import HideIcon from "../assets/icons/hidden.png";
 
+import styles from "./modules/SingIn.module.css";
+
 export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -26,23 +28,26 @@ export default function SignIn() {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <Form.Input name="email" value={email} onChangeFunction={handleEmail} type="text">
-                Email:
-            </Form.Input>
-            <Form.Input
-                name="password"
-                value={password}
-                onChangeFunction={handlePassword}
-                type={passwordShown ? "text" : "password"}
-                icon={passwordShown ? ShowIcon : HideIcon}
-                iconFunction={handleShowPassword}
-            >
-                Password:
-            </Form.Input>
-            <Form.Button type="submit" name="show_password">
-                Submit
-            </Form.Button>
-        </Form>
+        <div className={styles.container}>
+            <h1>Welcome Back!</h1>
+            <Form onSubmit={handleSubmit}>
+                <Form.Input name="email" value={email} onChangeFunction={handleEmail} type="email">
+                    Email:
+                </Form.Input>
+                <Form.Input
+                    name="password"
+                    value={password}
+                    onChangeFunction={handlePassword}
+                    type={passwordShown ? "text" : "password"}
+                    icon={passwordShown ? ShowIcon : HideIcon}
+                    iconFunction={handleShowPassword}
+                >
+                    Password:
+                </Form.Input>
+                <Form.Button type="submit" name="submit">
+                    Submit
+                </Form.Button>
+            </Form>
+        </div>
     );
 }
