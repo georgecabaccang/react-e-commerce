@@ -1,6 +1,6 @@
 enum PAGES {
     HOME = "/",
-    SIGNIN = "sign_in",
+    SIGNIN = "signin",
     REGISTRATION = "registration",
     STORE = "store",
 }

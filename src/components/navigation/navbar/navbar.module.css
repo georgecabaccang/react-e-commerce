@@ -1,7 +1,49 @@
-.navbar_list {
+.nav {
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.3rem 4rem;
+    width: 100vw;
+    width: 100dvw;
+}
+
+.nav ul {
     list-style: none;
     display: flex;
     gap: 1rem;
-    width: 100dvw;
-    background: red;
+}
+
+.nav a {
+    font-size: 1.2rem;
+    width: auto;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 10rem;
+    max-width: 10rem;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.nav a:hover {
+    transition-timing-function: linear;
+    transition: 0.3s;
+    color: white;
+    background: #7c7c7c;
+}
+
+.nav > .logo {
+    width: auto;
+}
+
+.nav > .logo:hover {
+    width: auto;
+    transition: none;
+    background-color: transparent;
+    color: black;
 }
