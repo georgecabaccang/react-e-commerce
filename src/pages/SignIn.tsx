@@ -1,46 +1,44 @@
 import { useState } from "react";
+import Form from "../components/reusables/form/Form";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
 
-    function handleEmail(event: React.ChangeEvent<HTMLInputElement>) {
-        setEmail(event.target.value);
+    function handleEmail(value: string) {
+        setEmail(value);
     }
 
-    function handlePassword(event: React.ChangeEvent<HTMLInputElement>) {
-        setPassword(event.target.value);
+    function handlePassword(value: string) {
+        setPassword(value);
     }
 
     function handleShowPassword() {
         setPasswordShown((prev) => !prev);
     }
 
-    return (
-        <div>
-            <label>
-                <div>Email:</div>
+    function handleSubmit(event: React.FormEvent) {
+        event?.preventDefault();
+        console.log(email, password);
+    }
 
-                <input value={email} onChange={(event) => handleEmail(event)} name="email" />
-            </label>
-            <label>
-                <div>Password:</div>
-                <input
-                    value={password}
-                    onChange={(event) => handlePassword(event)}
-                    type={passwordShown ? "text" : "password"}
-                    name="password"
-                />
-            </label>
-            <button
-                type="button"
-                onClick={() => {
-                    handleShowPassword();
-                }}
+    return (
+        <Form onSubmit={handleSubmit}>
+            <Form.Input name="email" value={email} onChangeFunction={handleEmail} type="text">
+                Email:
+            </Form.Input>
+            <Form.Input
+                name="password"
+                value={password}
+                onChangeFunction={handlePassword}
+                type={passwordShown ? "text" : "password"}
             >
-                Show Password
-            </button>
-        </div>
+                Password:
+            </Form.Input>
+            <Form.Button type="submit" name="show_password">
+                Submit
+            </Form.Button>
+        </Form>
     );
 }
