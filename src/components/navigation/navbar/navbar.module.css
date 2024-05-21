@@ -1,0 +1,7 @@
+.navbar_list {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    width: 100dvw;
+    background: red;
+}
