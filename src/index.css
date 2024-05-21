@@ -37,8 +37,12 @@ h6 {
 #root,
 #__next {
     isolation: isolate;
+    height: 100%;
+
 }
 
-html {
+html,
+body {
     background-color: #eaefee;
+    height: 100%;
 }
