@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Form from "../components/reusables/form/Form";
+import ShowIcon from "../assets/icons/view.png";
+import HideIcon from "../assets/icons/hidden.png";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
@@ -33,6 +35,8 @@ export default function SignIn() {
                 value={password}
                 onChangeFunction={handlePassword}
                 type={passwordShown ? "text" : "password"}
+                icon={passwordShown ? ShowIcon : HideIcon}
+                iconFunction={handleShowPassword}
             >
                 Password:
             </Form.Input>

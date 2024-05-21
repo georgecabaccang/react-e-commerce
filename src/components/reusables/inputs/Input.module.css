@@ -1,0 +1,25 @@
+.container {
+}
+
+.input_container {
+    display: flex;
+    align-content: center;
+    width: 15rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.3rem 0.5rem 0.3rem 0.3rem;
+}
+
+.input_password {
+    width: 100%;
+    padding: 0.3rem 1.9rem 0.3rem 0.3rem;
+}
+
+.button_icon {
+    background: transparent;
+    border: none;
+    width: 30px;
+    margin-left: -2rem;
+}
