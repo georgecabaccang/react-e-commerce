@@ -1,3 +1,5 @@
+import styles from "./Button.module.css";
+
 interface IFormButton {
     children: React.ReactNode;
     name: string;
@@ -7,7 +9,7 @@ interface IFormButton {
 
 export default function Button({ children, name, clickFunction, type }: IFormButton) {
     return (
-        <button name={name} onClick={clickFunction} type={type}>
+        <button className={styles.button} name={name} onClick={clickFunction} type={type}>
             {children}
         </button>
     );
