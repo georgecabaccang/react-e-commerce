@@ -46,19 +46,19 @@ export default function SignIn() {
                             value={email}
                             onChangeFunction={handleEmail}
                             type="email"
-                        >
-                            Email:
-                        </Form.Input>
+                            placeholder="Email Address"
+                        />
+
                         <Form.Input
                             name="password"
                             value={password}
                             onChangeFunction={handlePassword}
                             type={passwordShown ? "text" : "password"}
+                            placeholder="Password"
                             icon={passwordShown ? ShowIcon : HideIcon}
                             iconFunction={handleShowPassword}
-                        >
-                            Password:
-                        </Form.Input>
+                        />
+
                         <Form.Button type="submit" name="submit">
                             Submit
                         </Form.Button>

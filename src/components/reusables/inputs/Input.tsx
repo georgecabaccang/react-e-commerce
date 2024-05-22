@@ -1,7 +1,7 @@
 import styles from "./Input.module.css";
 
 interface IInput {
-    children: React.ReactNode;
+    placeholder: string;
     value: string | number;
     onChangeFunction?: (value: string) => void;
     name: string;
@@ -11,7 +11,7 @@ interface IInput {
 }
 
 export default function Input({
-    children,
+    placeholder,
     value,
     onChangeFunction,
     name,
@@ -25,7 +25,6 @@ export default function Input({
 
     return (
         <label>
-            <div>{children}</div>
             <div className={styles.input_container}>
                 <input
                     className={icon ? styles.input_password : styles.input}
@@ -33,6 +32,7 @@ export default function Input({
                     onChange={(event) => handleInput(event.target.value)}
                     name={name}
                     type={type}
+                    placeholder={placeholder}
                 />
                 {icon && (
                     <button type="button" className={styles.button_icon} onClick={iconFunction}>
