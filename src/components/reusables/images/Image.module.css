@@ -1,0 +1,13 @@
+.image_small {
+    width: 5rem;
+}
+.image_medium {
+    width: 7rem;
+}
+.image_large {
+    width: 10rem;
+}
+
+.image_extra_large {
+    width: 15rem;
+}

@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Form from "../components/reusables/form/Form";
 import ShowIcon from "../assets/icons/view.png";
 import HideIcon from "../assets/icons/hidden.png";
 
 import styles from "./modules/SingIn.module.css";
+import LogoBlack from "../assets/logos/we-got-it-black.png";
+import Image from "../components/reusables/images/Image";
+import SIZE from "../constants/images";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
+    const [disbaled, setDisabled] = useState(true);
 
     function handleEmail(value: string) {
         setEmail(value);
@@ -27,6 +31,13 @@ export default function SignIn() {
         console.log(email, password);
     }
 
+    useEffect(() => {
+        if (email && password) {
+            return setDisabled(false);
+        }
+        setDisabled(true);
+    }, [email, password]);
+
     return (
         <div className={styles.main_container}>
             <div className={styles.upper_parent_container}>
@@ -39,27 +50,29 @@ export default function SignIn() {
                 <div className={styles.container}></div>
 
                 <div className={styles.main_content}>
+                    <Image size={SIZE.XL} source={LogoBlack} />
                     <h1>Welcome Back!</h1>
+                    <h2>Please login to your account</h2>
                     <Form onSubmit={handleSubmit}>
                         <Form.Input
                             name="email"
                             value={email}
                             onChangeFunction={handleEmail}
                             type="email"
-                        >
-                            Email:
-                        </Form.Input>
+                            placeholder="Email Address"
+                        />
+
                         <Form.Input
                             name="password"
                             value={password}
                             onChangeFunction={handlePassword}
                             type={passwordShown ? "text" : "password"}
+                            placeholder="Password"
                             icon={passwordShown ? ShowIcon : HideIcon}
                             iconFunction={handleShowPassword}
-                        >
-                            Password:
-                        </Form.Input>
-                        <Form.Button type="submit" name="submit">
+                        />
+
+                        <Form.Button type="submit" name="submit" disabled={disbaled}>
                             Submit
                         </Form.Button>
                     </Form>
