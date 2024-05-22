@@ -1,8 +1,10 @@
-.button {
+.button,
+.button_disabled {
     width: 100%;
     height: 4.3rem;
     border-radius: 18px;
     border: 1px solid rgba(0, 0, 0, 0.156);
+    transition: 0.3s;
     box-shadow: 0 0 10px -2px rgba(0, 0, 0, 0.187);
 }
 
@@ -11,4 +13,16 @@
     box-shadow: unset;
     transform: scale(0.999999);
     background: #d6d6d6;
+}
+
+.button_disabled {
+    transition: 0.3s;
+    cursor: not-allowed;
+    box-shadow: unset;
+    text-decoration: line-through;
+}
+
+.button_disabled:before,
+.button_disabled:after {
+    content: "\00a0\00a0\00a0";
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Form from "../components/reusables/form/Form";
 import ShowIcon from "../assets/icons/view.png";
 import HideIcon from "../assets/icons/hidden.png";
@@ -9,6 +9,7 @@ export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
+    const [disbaled, setDisabled] = useState(true);
 
     function handleEmail(value: string) {
         setEmail(value);
@@ -26,6 +27,13 @@ export default function SignIn() {
         event?.preventDefault();
         console.log(email, password);
     }
+
+    useEffect(() => {
+        if (email && password) {
+            return setDisabled(false);
+        }
+        setDisabled(true);
+    }, [email, password]);
 
     return (
         <div className={styles.main_container}>
@@ -59,7 +67,7 @@ export default function SignIn() {
                             iconFunction={handleShowPassword}
                         />
 
-                        <Form.Button type="submit" name="submit">
+                        <Form.Button type="submit" name="submit" disabled={disbaled}>
                             Submit
                         </Form.Button>
                     </Form>
