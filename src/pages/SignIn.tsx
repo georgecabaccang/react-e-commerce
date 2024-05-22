@@ -48,6 +48,7 @@ export default function SignIn() {
 
                 <div className={styles.main_content}>
                     <h1>Welcome Back!</h1>
+                    <h2>Please login to your account</h2>
                     <Form onSubmit={handleSubmit}>
                         <Form.Input
                             name="email"
