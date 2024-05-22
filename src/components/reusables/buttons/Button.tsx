@@ -9,7 +9,6 @@ interface IFormButton {
 }
 
 export default function Button({ children, name, clickFunction, type, disabled }: IFormButton) {
-    console.log(disabled);
     return (
         <button
             className={disabled ? styles.button_disabled : styles.button}

@@ -4,6 +4,9 @@ import ShowIcon from "../assets/icons/view.png";
 import HideIcon from "../assets/icons/hidden.png";
 
 import styles from "./modules/SingIn.module.css";
+import LogoBlack from "../assets/logos/we-got-it-black.png";
+import Image from "../components/reusables/images/Image";
+import SIZE from "../constants/images";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
@@ -47,6 +50,7 @@ export default function SignIn() {
                 <div className={styles.container}></div>
 
                 <div className={styles.main_content}>
+                    <Image size={SIZE.XL} source={LogoBlack} />
                     <h1>Welcome Back!</h1>
                     <h2>Please login to your account</h2>
                     <Form onSubmit={handleSubmit}>
