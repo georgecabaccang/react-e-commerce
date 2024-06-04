@@ -40,17 +40,20 @@ export default function SignIn() {
 
     return (
         <div className={styles.main_container}>
+            {/* Start of dummy containers */}
             <div className={styles.upper_parent_container}>
                 <div className={styles.container_left}></div>
                 <div className={styles.container_mid}></div>
                 <div className={styles.container_right}></div>
             </div>
+            {/* End of dummy containers */}
 
+            {/* Start of Main Content */}
             <div className={styles.parent_container}>
                 <div className={styles.container}></div>
 
                 <div className={styles.main_content}>
-                    <Image size={SIZE.XL} source={LogoBlack} />
+                    <Image size={SIZE.MEDIUM} source={LogoBlack} />
                     <h1>Welcome Back!</h1>
                     <h2>Please login to your account</h2>
                     <Form onSubmit={handleSubmit}>
@@ -79,11 +82,15 @@ export default function SignIn() {
                 </div>
                 <div className={styles.container}></div>
             </div>
+            {/* End of Main Content */}
+
+            {/* Start of dummy containers */}
             <div className={styles.lower_parent_container}>
                 <div className={styles.container_left}></div>
                 <div className={styles.container_mid}></div>
                 <div className={styles.container_right}></div>
             </div>
+            {/* End of dummy containers */}
         </div>
     );
 }
