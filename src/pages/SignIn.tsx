@@ -6,6 +6,8 @@ import HideIcon from "../assets/icons/hidden.png";
 import LogoBlack from "../assets/logos/we-got-it-black.png";
 import SIZE from "../constants/images";
 import ContentContainer from "../components/reusables/layouts/ContentContainer";
+import { Link } from "react-router-dom";
+import PAGES from "../constants/pages";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
@@ -69,6 +71,7 @@ export default function SignIn() {
                     Submit
                 </Form.Button>
             </Form>
+            <Link to={`/${PAGES.REGISTRATION}`}>Sign Up</Link>
         </ContentContainer>
     );
 }
