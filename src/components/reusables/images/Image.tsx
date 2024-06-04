@@ -1,8 +1,10 @@
 import SIZE from "../../../constants/images";
 import styles from "./Image.module.css";
 
-export default function Image({ source, size }: { source: string; size: string }) {
+export default function Image({ source, size }: { source?: string; size?: string }) {
     let imageStyle;
+
+    if (!source) return null;
 
     switch (size) {
         case SIZE.SMALL:

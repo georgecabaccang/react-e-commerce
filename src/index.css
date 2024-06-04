@@ -40,6 +40,13 @@ h6 {
     height: 100%;
 }
 
+:root {
+    /* Start of Mid Content of Layout */
+    --mid-content-width-reg: 30vw;
+    --mid-content-Dwidth-reg: 30dvw;
+    /* End of Mid Content of Layout */
+}
+
 html,
 body {
     background-color: #eaefee;

@@ -3,16 +3,15 @@ import Form from "../components/reusables/form/Form";
 import ShowIcon from "../assets/icons/view.png";
 import HideIcon from "../assets/icons/hidden.png";
 
-import styles from "./modules/SingIn.module.css";
 import LogoBlack from "../assets/logos/we-got-it-black.png";
-import Image from "../components/reusables/images/Image";
 import SIZE from "../constants/images";
+import ContentContainer from "../components/reusables/layouts/ContentContainer";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
-    const [disbaled, setDisabled] = useState(true);
+    const [disabled, setDisabled] = useState(true);
 
     function handleEmail(value: string) {
         setEmail(value);
@@ -39,58 +38,35 @@ export default function SignIn() {
     }, [email, password]);
 
     return (
-        <div className={styles.main_container}>
-            {/* Start of dummy containers */}
-            <div className={styles.upper_parent_container}>
-                <div className={styles.container_left}></div>
-                <div className={styles.container_mid}></div>
-                <div className={styles.container_right}></div>
-            </div>
-            {/* End of dummy containers */}
+        <ContentContainer
+            source={LogoBlack}
+            size={SIZE.MEDIUM}
+            header="Welcome Back!"
+            subheader="Please login to your account"
+        >
+            <Form onSubmit={handleSubmit}>
+                <Form.Input
+                    name="email"
+                    value={email}
+                    onChangeFunction={handleEmail}
+                    type="email"
+                    placeholder="Email Address"
+                />
 
-            {/* Start of Main Content */}
-            <div className={styles.parent_container}>
-                <div className={styles.container}></div>
+                <Form.Input
+                    name="password"
+                    value={password}
+                    onChangeFunction={handlePassword}
+                    type={passwordShown ? "text" : "password"}
+                    placeholder="Password"
+                    icon={passwordShown ? ShowIcon : HideIcon}
+                    iconFunction={handleShowPassword}
+                />
 
-                <div className={styles.main_content}>
-                    <Image size={SIZE.MEDIUM} source={LogoBlack} />
-                    <h1>Welcome Back!</h1>
-                    <h2>Please login to your account</h2>
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Input
-                            name="email"
-                            value={email}
-                            onChangeFunction={handleEmail}
-                            type="email"
-                            placeholder="Email Address"
-                        />
-
-                        <Form.Input
-                            name="password"
-                            value={password}
-                            onChangeFunction={handlePassword}
-                            type={passwordShown ? "text" : "password"}
-                            placeholder="Password"
-                            icon={passwordShown ? ShowIcon : HideIcon}
-                            iconFunction={handleShowPassword}
-                        />
-
-                        <Form.Button type="submit" name="submit" disabled={disbaled}>
-                            Submit
-                        </Form.Button>
-                    </Form>
-                </div>
-                <div className={styles.container}></div>
-            </div>
-            {/* End of Main Content */}
-
-            {/* Start of dummy containers */}
-            <div className={styles.lower_parent_container}>
-                <div className={styles.container_left}></div>
-                <div className={styles.container_mid}></div>
-                <div className={styles.container_right}></div>
-            </div>
-            {/* End of dummy containers */}
-        </div>
+                <Form.Button type="submit" name="submit" disabled={disabled}>
+                    Submit
+                </Form.Button>
+            </Form>
+        </ContentContainer>
     );
 }
