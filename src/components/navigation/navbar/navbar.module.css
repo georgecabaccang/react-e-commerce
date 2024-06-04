@@ -1,4 +1,6 @@
 .nav {
+    position: fixed;
+    top: 0;
     border: 1px solid black;
     border-left: none;
     border-right: none;
@@ -8,6 +10,7 @@
     padding: 1.3rem 4rem;
     width: 100vw;
     width: 100dvw;
+    background-color: #eaefee;
 }
 
 .nav ul {
