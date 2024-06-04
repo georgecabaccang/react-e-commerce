@@ -31,9 +31,8 @@ export default function ContentContainer({
                 <div className={styles.container}></div>
                 <div className={styles.main_content}>
                     <Image size={size} source={source} />
-                    <h1 className={styles.header}>{header}</h1>
-                    <h2 className={styles.subheader}>{subheader}</h2>
-                    {children}
+                    {header && <h1 className={styles.header}>{header}</h1>}
+                    {subheader && <h2 className={styles.subheader}>{subheader}</h2>} {children}
                 </div>
                 <div className={styles.container}></div>
             </div>
