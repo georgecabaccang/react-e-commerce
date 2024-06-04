@@ -61,6 +61,8 @@ export default function SignIn() {
                     placeholder="Password"
                     icon={passwordShown ? ShowIcon : HideIcon}
                     iconFunction={handleShowPassword}
+                    link="/forgot-password"
+                    linkName="Forgot your password?"
                 />
 
                 <Form.Button type="submit" name="submit" disabled={disabled}>
