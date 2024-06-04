@@ -11,6 +11,7 @@ interface IInput {
     iconFunction?: () => void;
     link?: string;
     linkName?: string;
+    error?: string | null;
 }
 
 export default function Input({
@@ -23,13 +24,14 @@ export default function Input({
     iconFunction,
     link,
     linkName,
+    error,
 }: IInput) {
     function handleInput(value: string) {
         onChangeFunction && onChangeFunction(value);
     }
 
     return (
-        <label>
+        <label className={styles.parent_container}>
             <div className={styles.input_container}>
                 <input
                     className={icon ? styles.input_password : styles.input}
@@ -50,6 +52,7 @@ export default function Input({
                     <Link to={link}>{linkName}</Link>
                 </div>
             )}
+            {error && <span className={styles.error}>{error}</span>}
         </label>
     );
 }
