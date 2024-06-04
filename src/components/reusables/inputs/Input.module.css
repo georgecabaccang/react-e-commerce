@@ -25,6 +25,20 @@
     border: none;
 }
 
+.input_link a {
+    display: flex;
+    justify-content: end;
+    margin-top: 0.6rem;
+    text-decoration: none;
+    color: black;
+    transition: 0.2s;
+}
+
+.input_link a:hover {
+    transition: 0.2s;
+    color: gray;
+}
+
 .button_icon {
     background: transparent;
     border: none;

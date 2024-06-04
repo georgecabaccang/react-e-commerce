@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./Input.module.css";
 
 interface IInput {
@@ -8,6 +9,8 @@ interface IInput {
     type: string;
     icon?: string;
     iconFunction?: () => void;
+    link?: string;
+    linkName?: string;
 }
 
 export default function Input({
@@ -18,6 +21,8 @@ export default function Input({
     type,
     icon,
     iconFunction,
+    link,
+    linkName,
 }: IInput) {
     function handleInput(value: string) {
         onChangeFunction && onChangeFunction(value);
@@ -40,6 +45,11 @@ export default function Input({
                     </button>
                 )}
             </div>
+            {link && (
+                <div className={styles.input_link}>
+                    <Link to={link}>{linkName}</Link>
+                </div>
+            )}
         </label>
     );
 }
