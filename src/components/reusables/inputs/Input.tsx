@@ -12,6 +12,7 @@ interface IInput {
     link?: string;
     linkName?: string;
     error?: string | null;
+    onClickFunction?: () => void;
 }
 
 export default function Input({
@@ -25,6 +26,7 @@ export default function Input({
     link,
     linkName,
     error,
+    onClickFunction,
 }: IInput) {
     function handleInput(value: string) {
         onChangeFunction && onChangeFunction(value);
@@ -40,6 +42,7 @@ export default function Input({
                     name={name}
                     type={type}
                     placeholder={placeholder}
+                    onFocus={onClickFunction}
                 />
                 {icon && (
                     <button type="button" className={styles.button_icon} onClick={iconFunction}>
