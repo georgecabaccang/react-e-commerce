@@ -8,12 +8,15 @@ import LogoBlack from "../assets/logos/we-got-it-black.png";
 import ContentContainer from "../components/reusables/layouts/ContentContainer";
 import { Link } from "react-router-dom";
 import PAGES from "../constants/pages";
+import * as EmailValidator from "email-validator";
 
 export default function Registration() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    const [emailTouched, setEmailTouched] = useState(false);
+    const [isValidEmail, setIsValidEmail] = useState(false);
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setconfirmPasswordShown] = useState(false);
     const [passwordsMatch, setPasswordsMatch] = useState(false);
@@ -22,6 +25,10 @@ export default function Registration() {
 
     function handleEmail(value: string) {
         setEmail(value);
+    }
+
+    function handleTouchEmail() {
+        !emailTouched ? setEmailTouched(true) : null;
     }
 
     function handlePassword(value: string) {
@@ -46,6 +53,13 @@ export default function Registration() {
     }
 
     useEffect(() => {
+        if (EmailValidator.validate(email)) {
+            return setIsValidEmail(true);
+        }
+        return setIsValidEmail(false);
+    }, [email]);
+
+    useEffect(() => {
         if (password === confirmPassword) {
             return setPasswordsMatch(true);
         }
@@ -53,11 +67,11 @@ export default function Registration() {
     }, [password, confirmPassword]);
 
     useEffect(() => {
-        if (email && password && confirmPassword && passwordsMatch) {
+        if (email && isValidEmail && password && confirmPassword && passwordsMatch) {
             return setDisabled(false);
         }
         return setDisabled(true);
-    }, [email, password, confirmPassword, passwordsMatch]);
+    }, [email, isValidEmail, password, confirmPassword, passwordsMatch]);
 
     return (
         <ContentContainer source={LogoBlack} size={SIZE.MEDIUM} header="Sign Up">
@@ -68,6 +82,10 @@ export default function Registration() {
                     onChangeFunction={handleEmail}
                     type="email"
                     placeholder="Email Address"
+                    onClickFunction={handleTouchEmail}
+                    error={
+                        !isValidEmail && emailTouched ? "Please enter a valid email address" : null
+                    }
                 />
 
                 <Form.Input
