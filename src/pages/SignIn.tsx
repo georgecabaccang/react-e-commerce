@@ -8,6 +8,7 @@ import SIZE from "../constants/images";
 import ContentContainer from "../components/reusables/layouts/ContentContainer";
 import { Link } from "react-router-dom";
 import PAGES from "../constants/pages";
+import axios from "axios";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
@@ -27,9 +28,20 @@ export default function SignIn() {
         setPasswordShown((prev) => !prev);
     }
 
-    function handleSubmit(event: React.FormEvent) {
-        event?.preventDefault();
-        console.log(email, password);
+    async function handleSubmit(event: React.FormEvent) {
+        event.preventDefault();
+
+        if (!email || !password) return console.log("oh no you don't");
+
+        try {
+            const { data } = await axios.post("http://localhost:8002/user/sign-in", {
+                email: email,
+                password: password,
+            });
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
