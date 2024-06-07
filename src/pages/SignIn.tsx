@@ -8,9 +8,7 @@ import SIZE from "../constants/images";
 import ContentContainer from "../components/reusables/layouts/ContentContainer";
 import { Link } from "react-router-dom";
 import PAGES from "../constants/pages";
-import { useSelector } from "react-redux";
-import useSignIn from "../hooks/useSignIn";
-import { RootState } from "../store/store";
+import axios from "axios";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
@@ -36,8 +34,18 @@ export default function SignIn() {
 
     async function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
+
         if (!email || !password) return console.log("oh no you don't");
-        signIn(email, password);
+
+        try {
+            const { data } = await axios.post("http://localhost:8002/user/sign-in", {
+                email: email,
+                password: password,
+            });
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
