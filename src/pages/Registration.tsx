@@ -9,7 +9,8 @@ import ContentContainer from "../components/reusables/layouts/ContentContainer";
 import { Link } from "react-router-dom";
 import PAGES from "../constants/pages";
 import * as EmailValidator from "email-validator";
-import axios, { AxiosError } from "axios";
+import useSignIn from "../hooks/useSignIn";
+import axios, { AxiosResponse } from "axios";
 
 export default function Registration() {
     const [email, setEmail] = useState("");
@@ -23,6 +24,8 @@ export default function Registration() {
     const [passwordsMatch, setPasswordsMatch] = useState(false);
 
     const [disabled, setDisabled] = useState(true);
+
+    const signIn = useSignIn();
 
     function handleEmail(value: string) {
         setEmail(value);
@@ -53,16 +56,17 @@ export default function Registration() {
 
         if (!email || !password || !confirmPassword) return console.log("really?");
 
-        try {
-            const { data } = await axios.post("http://localhost:8002/user/sign-up", {
-                email: email,
-                password: password,
-            });
-            console.log(data);
-        } catch (error) {
-            if (error instanceof AxiosError) {
-                console.log(error.response?.data);
-            }
+        const response: AxiosResponse = await axios.post("http://localhost:8002/user/sign-up", {
+            email: email,
+            password: password,
+        });
+
+        switch (response.status) {
+            case 201:
+                signIn(email, password);
+                break;
+            default:
+                console.log(response);
         }
     }
 
