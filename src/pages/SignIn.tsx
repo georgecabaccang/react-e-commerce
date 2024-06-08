@@ -8,12 +8,19 @@ import SIZE from "../constants/images";
 import ContentContainer from "../components/reusables/layouts/ContentContainer";
 import { Link } from "react-router-dom";
 import PAGES from "../constants/pages";
+import { useSelector } from "react-redux";
+import useSignIn from "../hooks/useSignIn";
+import { RootState } from "../store/store";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
     const [disabled, setDisabled] = useState(true);
+
+    const signIn = useSignIn();
+    const signedInUser = useSelector((state: RootState) => state.user.email);
+    const isSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
 
     function handleEmail(value: string) {
         setEmail(value);
@@ -27,10 +34,15 @@ export default function SignIn() {
         setPasswordShown((prev) => !prev);
     }
 
-    function handleSubmit(event: React.FormEvent) {
-        event?.preventDefault();
-        console.log(email, password);
+    async function handleSubmit(event: React.FormEvent) {
+        event.preventDefault();
+        if (!email || !password) return console.log("oh no you don't");
+        signIn(email, password);
     }
+
+    useEffect(() => {
+        console.log(signedInUser, isSignedIn);
+    }, [signedInUser, isSignedIn]);
 
     useEffect(() => {
         if (email && password) {
