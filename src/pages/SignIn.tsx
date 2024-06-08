@@ -9,7 +9,7 @@ import ContentContainer from "../components/reusables/layouts/ContentContainer";
 import { Link } from "react-router-dom";
 import PAGES from "../constants/pages";
 import { useSelector } from "react-redux";
-import useSignIn from "../hooks/useSignIn";
+import useSignIn from "../hooks/services/useSignIn";
 import { RootState } from "../store/store";
 
 export default function SignIn() {
