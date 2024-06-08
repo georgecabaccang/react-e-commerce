@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import URLS from "../constants/urls";
 import axios from "axios";
+import ProductList from "../components/products/ProductList";
 
-interface IProducts {
+export interface IProducts {
     id: number;
     title: string;
     price: number;
@@ -31,5 +32,7 @@ export default function Store() {
         console.log(products);
     }, [products]);
 
-    return <div>Store</div>;
+    if (!products) return "Loading";
+
+    return <ProductList products={products} />;
 }
