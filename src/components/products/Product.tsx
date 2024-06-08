@@ -23,7 +23,11 @@ Product.Description = function Description({ children }: { children: ReactNode }
 };
 
 Product.Image = function Image({ source, title }: { source: string; title: string }) {
-    return <img className={styles.product_image} src={source} alt={title} />;
+    return (
+        <div className={styles.product_image__container}>
+            <img className={styles.product_image} src={source} alt={title} />
+        </div>
+    );
 };
 
 Product.Rating = function Rating({ rate, count }: { rate: number; count: number }) {
