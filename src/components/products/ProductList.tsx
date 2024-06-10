@@ -11,7 +11,7 @@ export default function ProductList({ products }: { products: IProducts[] }) {
                     <Product>
                         <Product.Image source={product.image} title={product.title} />
                         <Product.Title>{product.title}</Product.Title>
-                        <Product.Price>{product.price}</Product.Price>
+                        <Product.Price>{product.price.toFixed(2)}</Product.Price>
                         {/* <Product.Description>{product.description}</Product.Description> */}
                         {/* <Product.Category>{product.category}</Product.Category> */}
                         <Product.Rating rate={product.rating.rate} count={product.rating.count} />
