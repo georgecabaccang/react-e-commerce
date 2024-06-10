@@ -23,3 +23,14 @@
     background: white;
     border-radius: 5%;
 }
+
+.product_item__rating__container {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.product_item__rating__star {
+    width: auto;
+    height: 1.1rem;
+}

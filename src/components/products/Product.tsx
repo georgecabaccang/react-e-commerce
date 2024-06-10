@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import BlackStar from "../../assets/icons/star-black.png";
 
 import styles from "./Product.module.css";
 
@@ -11,7 +12,7 @@ Product.Title = function Title({ children }: { children: ReactNode }) {
 };
 
 Product.Price = function Price({ children }: { children: ReactNode }) {
-    return <div>{children}</div>;
+    return <span>$ {children}</span>;
 };
 
 Product.Category = function Category({ children }: { children: ReactNode }) {
@@ -33,8 +34,11 @@ Product.Image = function Image({ source, title }: { source: string; title: strin
 Product.Rating = function Rating({ rate, count }: { rate: number; count: number }) {
     return (
         <>
-            <div>{rate}</div>
-            <div>{count}</div>
+            <div className={styles.product_item__rating__container}>
+                <img className={styles.product_item__rating__star} src={BlackStar} />
+                <span>{rate}</span>
+            </div>
+            <span>{count}</span>
         </>
     );
 };
