@@ -2,9 +2,20 @@ import { ReactNode } from "react";
 import BlackStar from "../../assets/icons/star-black.png";
 
 import styles from "./Product.module.css";
+import { Link } from "react-router-dom";
 
-export default function Product({ children }: { children: ReactNode }) {
-    return <div className={styles.product_item}>{children}</div>;
+export default function Product({
+    children,
+    productId,
+}: {
+    children: ReactNode;
+    productId: number;
+}) {
+    return (
+        <div className={styles.product_item}>
+            <Link to={`/products/${productId}`}>{children}</Link>
+        </div>
+    );
 }
 
 Product.Title = function Title({ children }: { children: ReactNode }) {

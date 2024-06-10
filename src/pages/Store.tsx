@@ -28,10 +28,6 @@ export default function Store() {
         getProducts();
     }, []);
 
-    useEffect(() => {
-        console.log(products);
-    }, [products]);
-
     if (!products) return "Loading";
 
     return <ProductList products={products} />;
