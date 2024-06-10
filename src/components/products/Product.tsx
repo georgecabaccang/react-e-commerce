@@ -8,7 +8,7 @@ export default function Product({ children }: { children: ReactNode }) {
 }
 
 Product.Title = function Title({ children }: { children: ReactNode }) {
-    return <div>{children}</div>;
+    return <span className={styles.product_title}>{children}</span>;
 };
 
 Product.Price = function Price({ children }: { children: ReactNode }) {
