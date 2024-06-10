@@ -31,6 +31,11 @@
     margin-bottom: 1rem;
 }
 
+.product_item_rating__main {
+    display: flex;
+    justify-content: space-between;
+}
+
 .product_item__rating__container {
     display: flex;
     align-items: center;

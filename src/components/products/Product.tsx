@@ -33,12 +33,12 @@ Product.Image = function Image({ source, title }: { source: string; title: strin
 
 Product.Rating = function Rating({ rate, count }: { rate: number; count: number }) {
     return (
-        <>
+        <div className={styles.product_item_rating__main}>
             <div className={styles.product_item__rating__container}>
                 <img className={styles.product_item__rating__star} src={BlackStar} />
                 <span>{rate}</span>
             </div>
-            <span>{count}</span>
-        </>
+            <span>Sold: {count}</span>
+        </div>
     );
 };
