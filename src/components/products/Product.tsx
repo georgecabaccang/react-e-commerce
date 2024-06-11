@@ -12,8 +12,10 @@ export default function Product({
     productId: number;
 }) {
     return (
-        <div className={styles.product_item}>
-            <Link to={`/products/${productId}`}>{children}</Link>
+        <div className={styles.product_item_container}>
+            <Link to={`/products/${productId}`}>
+                <div className={styles.product_item}>{children}</div>
+            </Link>
         </div>
     );
 }

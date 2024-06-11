@@ -5,6 +5,7 @@ enum URLS {
 
     // FAKE PRODUCTS API
     STORE_PRODUCTS = "https://fakestoreapi.com/products",
+    STORE_SINGLE_PRODUCT = "https://fakestoreapi.com/products/",
 }
 
 export default URLS;
