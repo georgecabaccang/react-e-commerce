@@ -65,6 +65,7 @@ export default function SignIn() {
                     onChangeFunction={handleEmail}
                     type="email"
                     placeholder="Email Address"
+                    rounded
                 />
 
                 <Form.Input
@@ -77,9 +78,11 @@ export default function SignIn() {
                     iconFunction={handleShowPassword}
                     link="/forgot-password"
                     linkName="Forgot your password?"
+                    rounded
+                    height="h-small"
                 />
 
-                <Form.Button type="submit" name="submit" disabled={disabled}>
+                <Form.Button type="submit" name="submit" disabled={disabled} rounded={true}>
                     Submit
                 </Form.Button>
             </Form>

@@ -13,6 +13,9 @@ interface IInput {
     linkName?: string;
     error?: string | null;
     onClickFunction?: () => void;
+    rounded?: boolean;
+    center?: boolean;
+    height?: "h-small" | "h-medium" | "h-large";
 }
 
 export default function Input({
@@ -27,6 +30,9 @@ export default function Input({
     linkName,
     error,
     onClickFunction,
+    rounded,
+    center,
+    height,
 }: IInput) {
     function handleInput(value: string) {
         onChangeFunction && onChangeFunction(value);
@@ -36,7 +42,9 @@ export default function Input({
         <label className={styles.parent_container}>
             <div className={styles.input_container}>
                 <input
-                    className={icon ? styles.input_password : styles.input}
+                    className={`${icon ? styles.input_password : styles.input} ${
+                        !rounded && "rounded-none"
+                    } ${center && "text-center px-0"} ${height}`}
                     value={value}
                     onChange={(event) => handleInput(event.target.value)}
                     name={name}
