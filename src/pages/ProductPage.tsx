@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { IProducts } from "./Store";
 import useGetRequest from "../hooks/services/useGetRequest";
 import URLS from "../constants/urls";
-import Product from "../components/products/Product";
+import ProductDetails from "../components/products/ProductDetails";
 
 export default function ProductPage() {
     const { productId } = useParams();
@@ -22,14 +22,5 @@ export default function ProductPage() {
 
     if (!productDetails) return "Loading";
 
-    return (
-        <Product productId={productDetails.id}>
-            <Product.Image source={productDetails.image} title={productDetails.title} />
-            <Product.Title isDetailsPage={true}>{productDetails.title}</Product.Title>
-            <Product.Price>{productDetails.price.toFixed(2)}</Product.Price>
-            <Product.Description>{productDetails.description}</Product.Description>
-            <Product.Category>{productDetails.category}</Product.Category>
-            <Product.Rating rate={productDetails.rating.rate} count={productDetails.rating.count} />
-        </Product>
-    );
+    return <ProductDetails product={productDetails} />;
 }

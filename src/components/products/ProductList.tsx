@@ -8,7 +8,7 @@ export default function ProductList({ products }: { products: IProducts[] }) {
         <ul className={styles.list}>
             {products.map((product, index) => {
                 return (
-                    <Product key={index} productId={product.id}>
+                    <Product key={index} productId={product.id} isDetailsPage={false}>
                         <Product.Image
                             isDetailsPage={false}
                             source={product.image}
