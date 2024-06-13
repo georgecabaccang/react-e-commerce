@@ -3,6 +3,7 @@ enum PAGES {
     SIGNIN = "signin",
     REGISTRATION = "registration",
     STORE = "store",
+    PRODUCT = "products",
 }
 
 export default PAGES;
