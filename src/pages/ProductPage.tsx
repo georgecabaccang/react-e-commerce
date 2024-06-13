@@ -25,7 +25,7 @@ export default function ProductPage() {
     return (
         <Product productId={productDetails.id}>
             <Product.Image source={productDetails.image} title={productDetails.title} />
-            <Product.Title>{productDetails.title}</Product.Title>
+            <Product.Title isDetailsPage={true}>{productDetails.title}</Product.Title>
             <Product.Price>{productDetails.price.toFixed(2)}</Product.Price>
             <Product.Description>{productDetails.description}</Product.Description>
             <Product.Category>{productDetails.category}</Product.Category>

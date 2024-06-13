@@ -9,10 +9,20 @@ export default function ProductList({ products }: { products: IProducts[] }) {
             {products.map((product, index) => {
                 return (
                     <Product key={index} productId={product.id}>
-                        <Product.Image source={product.image} title={product.title} />
-                        <Product.Title>{product.title}</Product.Title>
-                        <Product.Price>{product.price.toFixed(2)}</Product.Price>
-                        <Product.Rating rate={product.rating.rate} count={product.rating.count} />
+                        <Product.Image
+                            isDetailsPage={false}
+                            source={product.image}
+                            title={product.title}
+                        />
+                        <Product.Title isDetailsPage={false}>{product.title}</Product.Title>
+                        <Product.Price isDetailsPage={false}>
+                            {product.price.toFixed(2)}
+                        </Product.Price>
+                        <Product.Rating
+                            isDetailsPage={false}
+                            rate={product.rating.rate}
+                            count={product.rating.count}
+                        />
                     </Product>
                 );
             })}

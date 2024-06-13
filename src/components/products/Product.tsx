@@ -1,8 +1,13 @@
 import { ReactNode } from "react";
-import BlackStar from "../../assets/icons/star-black.png";
 
 import styles from "./Product.module.css";
 import { Link } from "react-router-dom";
+import Title from "./compound-components/Title";
+import Price from "./compound-components/Price";
+import Image from "./compound-components/Image";
+import Category from "./compound-components/Category";
+import Description from "./compound-components/Description";
+import Rating from "./compound-components/Rating";
 
 export default function Product({
     children,
@@ -20,38 +25,10 @@ export default function Product({
     );
 }
 
-Product.Title = function Title({ children }: { children: ReactNode }) {
-    return <span className={styles.product_title}>{children}</span>;
-};
+Product.Title = Title;
+Product.Price = Price;
+Product.Category = Category;
+Product.Description = Description;
+Product.Image = Image;
 
-Product.Price = function Price({ children }: { children: ReactNode }) {
-    return <span>$ {children}</span>;
-};
-
-Product.Category = function Category({ children }: { children: ReactNode }) {
-    return <div>{children}</div>;
-};
-
-Product.Description = function Description({ children }: { children: ReactNode }) {
-    return <div>{children}</div>;
-};
-
-Product.Image = function Image({ source, title }: { source: string; title: string }) {
-    return (
-        <div className={styles.product_image__container}>
-            <img className={styles.product_image} src={source} alt={title} />
-        </div>
-    );
-};
-
-Product.Rating = function Rating({ rate, count }: { rate: number; count: number }) {
-    return (
-        <div className={styles.product_item_rating__main}>
-            <div className={styles.product_item__rating__container}>
-                <img className={styles.product_item__rating__star} src={BlackStar} />
-                <span>{rate}</span>
-            </div>
-            <span>Sold: {count}</span>
-        </div>
-    );
-};
+Product.Rating = Rating;
