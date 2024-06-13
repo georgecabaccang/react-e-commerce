@@ -19,6 +19,7 @@ export default function QuantityBox({
                     name="add_quantity"
                     disabled={disabled}
                     backgroundcolor={TAILWIND_CONTANTS.BG_LIGHT_GRAY}
+                    height="h-small"
                 >
                     -
                 </Button>
@@ -39,6 +40,7 @@ export default function QuantityBox({
                     name="add_quantity"
                     disabled={disabled}
                     backgroundcolor={TAILWIND_CONTANTS.BG_LIGHT_GRAY}
+                    height="h-small"
                 >
                     +
                 </Button>
