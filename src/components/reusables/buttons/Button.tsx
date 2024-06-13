@@ -9,6 +9,7 @@ interface IFormButton {
     backgroundcolor?: string;
     rounded?: boolean;
     height?: "h-small" | "h-medium" | "h-large";
+    border?: boolean;
 }
 
 export default function Button({
@@ -20,12 +21,13 @@ export default function Button({
     backgroundcolor,
     rounded,
     height,
+    border,
 }: IFormButton) {
     return (
         <button
             className={`${
                 disabled ? styles.button_disabled : `${styles.button} ${backgroundcolor}`
-            } ${!rounded && "rounded-none"} ${height}`}
+            } ${!rounded && "rounded-none"} ${height} ${border && styles.button_bordered}`}
             disabled={disabled}
             name={name}
             onClick={clickFunction}

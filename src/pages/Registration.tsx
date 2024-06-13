@@ -131,7 +131,7 @@ export default function Registration() {
                     rounded
                 />
 
-                <Form.Button type="submit" name="submit" disabled={disabled} rounded>
+                <Form.Button type="submit" name="submit" disabled={disabled} rounded border>
                     Sign Up
                 </Form.Button>
             </Form>

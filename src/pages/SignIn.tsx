@@ -82,7 +82,7 @@ export default function SignIn() {
                     height="h-small"
                 />
 
-                <Form.Button type="submit" name="submit" disabled={disabled} rounded={true}>
+                <Form.Button type="submit" name="submit" disabled={disabled} rounded={true} border>
                     Submit
                 </Form.Button>
             </Form>

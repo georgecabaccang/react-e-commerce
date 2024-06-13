@@ -1,4 +1,3 @@
-import TAILWIND_CONTANTS from "../../../../constants/tailwind";
 import Button from "../../buttons/Button";
 import Input from "../Input";
 
@@ -18,7 +17,7 @@ export default function QuantityBox({
                     type="button"
                     name="add_quantity"
                     disabled={disabled}
-                    backgroundcolor={TAILWIND_CONTANTS.BG_LIGHT_GRAY}
+                    backgroundcolor={"bg-white"}
                     height="h-small"
                 >
                     -
@@ -39,7 +38,7 @@ export default function QuantityBox({
                     type="button"
                     name="add_quantity"
                     disabled={disabled}
-                    backgroundcolor={TAILWIND_CONTANTS.BG_LIGHT_GRAY}
+                    backgroundcolor={"bg-white"}
                     height="h-small"
                 >
                     +
