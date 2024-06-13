@@ -1,4 +1,5 @@
 import { IProducts } from "../../pages/Store";
+import QuantityBox from "../reusables/inputs/quantity-box/QuantityBox";
 import Product from "./Product";
 
 export default function ProductDetails({ product }: { product: IProducts }) {
@@ -25,11 +26,15 @@ export default function ProductDetails({ product }: { product: IProducts }) {
                     />
                 </Product.GroupTwo>
 
-                <Product.GroupThree isDetailsPage={true}>
+                <Product.GroupFour isDetailsPage={true}>
+                    <QuantityBox quantity="1" disabled={false} />
+                </Product.GroupFour>
+
+                <Product.GroupFour isDetailsPage={true}>
                     <Product.Description isDetailsPage={true}>
                         {product.description.charAt(0).toUpperCase() + product.description.slice(1)}
                     </Product.Description>
-                </Product.GroupThree>
+                </Product.GroupFour>
             </Product.RightPane>
         </Product>
     );

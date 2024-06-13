@@ -1,0 +1,12 @@
+.quantity_box__container {
+    display: flex;
+}
+
+.quantity_box__button {
+    width: 4rem;
+    height: 4rem;
+}
+
+.quantity_box__input {
+    width: 7rem;
+}
