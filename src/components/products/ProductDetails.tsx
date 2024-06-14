@@ -1,10 +1,12 @@
-import useQuantityChanger from "../../hooks/helpers/useQuantityChanger";
+import TAILWIND_CONTANTS from "../../constants/tailwind";
 import { IProducts } from "../../pages/Store";
 import QuantityBox from "../reusables/inputs/quantity-box/QuantityBox";
 import Product from "./Product";
 
 export default function ProductDetails({ product }: { product: IProducts }) {
-    const { quantity, increaseQuantity, decreaseQuantity, changeQuantity } = useQuantityChanger();
+    function getQuantity(quantity: number) {
+        console.log(quantity);
+    }
 
     return (
         <Product productId={product.id} isDetailsPage={true}>
@@ -31,10 +33,17 @@ export default function ProductDetails({ product }: { product: IProducts }) {
 
                 <Product.GroupFour isDetailsPage={true}>
                     <QuantityBox
-                        quantity={quantity}
-                        increase={increaseQuantity}
-                        decrease={decreaseQuantity}
-                        changeQuantity={changeQuantity}
+                        lowerLimit={1}
+                        higherLimit={100}
+                        confirmQuantityFn={getQuantity}
+                        quantityButtonColor={TAILWIND_CONTANTS.backGroundColors.white}
+                        quantityButtonFontColor={TAILWIND_CONTANTS.backGroundColors.gray}
+                        submitButtonWidht={TAILWIND_CONTANTS.width.extraLong}
+                        quantityButtonWidht={TAILWIND_CONTANTS.width.short}
+                        inputWidht={TAILWIND_CONTANTS.width.medium}
+                        height={TAILWIND_CONTANTS.height.small}
+                        fontWeight={TAILWIND_CONTANTS.fontSize.black}
+                        submitButtonColor={TAILWIND_CONTANTS.backGroundColors.gray}
                     />
                 </Product.GroupFour>
 

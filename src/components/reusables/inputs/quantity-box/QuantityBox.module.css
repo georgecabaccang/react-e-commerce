@@ -2,10 +2,6 @@
     display: flex;
 }
 
-.quantity_box__button {
-    width: 3rem;
-}
-
-.quantity_box__input {
-    width: 4rem;
+.quantity_box__container > *:last-child {
+    margin-left: 0.3rem;
 }

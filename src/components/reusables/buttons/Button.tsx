@@ -5,11 +5,14 @@ interface IFormButton {
     name: string;
     clickFunction?: () => void;
     type: "submit" | "reset" | "button" | undefined;
-    disabled: boolean;
+    disabled?: boolean;
     backgroundcolor?: string;
     rounded?: boolean;
-    height?: "h-small" | "h-medium" | "h-large";
+    height?: string;
+    widht?: string;
     border?: boolean;
+    fontWeight?: string;
+    fontColor?: string;
 }
 
 export default function Button({
@@ -21,13 +24,18 @@ export default function Button({
     backgroundcolor,
     rounded,
     height,
+    widht,
     border,
+    fontWeight,
+    fontColor,
 }: IFormButton) {
     return (
         <button
             className={`${
                 disabled ? styles.button_disabled : `${styles.button} ${backgroundcolor}`
-            } ${!rounded && "rounded-none"} ${height} ${border && styles.button_bordered}`}
+            } ${!rounded && "rounded-none"} ${height} ${widht} ${fontWeight} ${fontColor} ${
+                border && styles.button_bordered
+            }`}
             disabled={disabled}
             name={name}
             onClick={clickFunction}

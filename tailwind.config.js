@@ -6,11 +6,6 @@ export default {
             colors: {
                 "regal-blue": "#243c5a",
             },
-            height: {
-                small: "3rem",
-                medium: "4.3rem",
-                large: "5.3rem",
-            },
         },
     },
     plugins: [],

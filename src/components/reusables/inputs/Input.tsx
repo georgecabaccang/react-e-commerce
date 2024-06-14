@@ -15,8 +15,11 @@ interface IInput {
     onClickFunction?: () => void;
     rounded?: boolean;
     center?: boolean;
-    height?: "h-small" | "h-medium" | "h-large";
+    height?: string;
+    width?: string;
     focus?: boolean;
+    max?: number;
+    min?: number;
 }
 
 export default function Input({
@@ -34,7 +37,10 @@ export default function Input({
     rounded,
     center,
     height,
+    width,
     focus,
+    max,
+    min,
 }: IInput) {
     function handleInput(value: string) {
         onChangeFunction && onChangeFunction(value);
@@ -46,13 +52,17 @@ export default function Input({
                 <input
                     className={`${icon ? styles.input_password : styles.input} ${
                         !rounded && "rounded-none"
-                    } ${center && "text-center px-0"} ${height} ${!focus && "focus:shadow-none"}`}
+                    } ${center && "text-center px-0"} ${height} ${width} ${
+                        !focus && "focus:shadow-none"
+                    }`}
                     value={value}
                     onChange={(event) => handleInput(event.target.value)}
                     name={name}
                     type={type}
                     placeholder={placeholder}
                     onFocus={onClickFunction}
+                    max={max}
+                    min={min}
                 />
                 {icon && (
                     <button type="button" className={styles.button_icon} onClick={iconFunction}>

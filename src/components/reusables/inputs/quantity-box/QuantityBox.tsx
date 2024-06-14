@@ -1,56 +1,94 @@
+import useQuantityChanger from "../../../../hooks/helpers/useQuantityChanger";
 import Button from "../../buttons/Button";
 import Input from "../Input";
 
 import styles from "./QuantityBox.module.css";
 
 export default function QuantityBox({
-    quantity,
-    increase,
-    decrease,
-    changeQuantity,
+    confirmQuantityFn,
+    lowerLimit,
+    higherLimit,
+    height,
+    quantityButtonColor,
+    submitButtonColor,
+    submitButtonWidht,
+    quantityButtonWidht,
+    inputWidht,
+    fontWeight,
+    quantityButtonFontColor,
 }: {
-    quantity: string;
-    increase: () => void;
-    decrease: () => void;
-    changeQuantity: (value: string) => void;
+    confirmQuantityFn: (quantity: number) => void;
+    lowerLimit: number;
+    higherLimit: number;
+    submitButtonWidht?: string;
+    quantityButtonWidht?: string;
+    inputWidht?: string;
+    height?: string;
+    quantityButtonColor?: string;
+    submitButtonColor?: string;
+    fontWeight?: string;
+    quantityButtonFontColor: string;
 }) {
+    const { quantity, increaseQuantity, decreaseQuantity, changeQuantity } = useQuantityChanger();
+
+    const setHeight = height ? height : "h-small";
+    const setQuantityButtonColor = quantityButtonColor ? quantityButtonColor : "bg-white";
+    const setSubmitButtonColor = submitButtonColor ? submitButtonColor : "bg-white";
+
     return (
         <div className={styles.quantity_box__container}>
-            <div className={styles.quantity_box__button}>
-                <Button
-                    type="button"
-                    name="add_quantity"
-                    disabled={+quantity < 2 ? true : false}
-                    clickFunction={decrease}
-                    backgroundcolor={"bg-white"}
-                    height="h-small"
-                >
-                    -
-                </Button>
-            </div>
-            <div className={styles.quantity_box__input}>
-                <Input
-                    placeholder={quantity}
-                    value={quantity}
-                    onChangeFunction={changeQuantity}
-                    name="product_quantity"
-                    type="input"
-                    center
-                    height="h-small"
-                />
-            </div>
-            <div className={styles.quantity_box__button}>
-                <Button
-                    type="button"
-                    name="add_quantity"
-                    disabled={+quantity > 99 ? true : false}
-                    clickFunction={increase}
-                    backgroundcolor={"bg-white"}
-                    height="h-small"
-                >
-                    +
-                </Button>
-            </div>
+            <Button
+                type="button"
+                name="add_quantity"
+                clickFunction={() => {
+                    +quantity === lowerLimit ? null : decreaseQuantity();
+                }}
+                backgroundcolor={setQuantityButtonColor}
+                height={setHeight}
+                widht={quantityButtonWidht}
+                fontWeight={fontWeight}
+                fontColor={quantityButtonFontColor}
+            >
+                -
+            </Button>
+
+            <Input
+                placeholder={quantity}
+                value={quantity}
+                onChangeFunction={changeQuantity}
+                name="product_quantity"
+                type="number"
+                center
+                height={setHeight}
+                width={inputWidht}
+                max={higherLimit}
+                min={lowerLimit}
+            />
+
+            <Button
+                type="button"
+                name="add_quantity"
+                clickFunction={() => {
+                    +quantity === higherLimit ? null : increaseQuantity();
+                }}
+                backgroundcolor={setQuantityButtonColor}
+                height={setHeight}
+                widht={quantityButtonWidht}
+                fontWeight={fontWeight}
+            >
+                +
+            </Button>
+
+            <Button
+                type="submit"
+                name="submit_quantity"
+                clickFunction={() => confirmQuantityFn(+quantity)}
+                backgroundcolor={setSubmitButtonColor}
+                height={setHeight}
+                widht={submitButtonWidht}
+            >
+                Add To Cart
+            </Button>
         </div>
     );
 }
