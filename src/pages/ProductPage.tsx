@@ -12,9 +12,10 @@ export default function ProductPage() {
     const getProduct = useGetRequest();
 
     const loadProduct = useCallback(async () => {
+        if (productDetails) return;
         const loadedProduct = await getProduct(`${URLS.STORE_SINGLE_PRODUCT}${productId}`);
         setProductDetails(loadedProduct);
-    }, [getProduct, productId]);
+    }, [getProduct, productId, productDetails]);
 
     useEffect(() => {
         loadProduct();

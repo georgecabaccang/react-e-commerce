@@ -1,7 +1,13 @@
+import TAILWIND_CONTANTS from "../../constants/tailwind";
 import { IProducts } from "../../pages/Store";
+import QuantityBox from "../reusables/inputs/quantity-box/QuantityBox";
 import Product from "./Product";
 
 export default function ProductDetails({ product }: { product: IProducts }) {
+    function getQuantity(quantity: number) {
+        console.log(quantity);
+    }
+
     return (
         <Product productId={product.id} isDetailsPage={true}>
             <Product.LeftPane isDetailsPage={true}>
@@ -25,11 +31,28 @@ export default function ProductDetails({ product }: { product: IProducts }) {
                     />
                 </Product.GroupTwo>
 
-                <Product.GroupThree isDetailsPage={true}>
+                <Product.GroupFour isDetailsPage={true}>
+                    <QuantityBox
+                        lowerLimit={1}
+                        higherLimit={100}
+                        confirmQuantityFn={getQuantity}
+                        quantityButtonColor={TAILWIND_CONTANTS.backGroundColors.white}
+                        quantityButtonFontColor={TAILWIND_CONTANTS.fontColor.gray}
+                        submitButtonFontColor={TAILWIND_CONTANTS.fontColor.white}
+                        submitButtonWidht={TAILWIND_CONTANTS.width.extraLong}
+                        quantityButtonWidht={TAILWIND_CONTANTS.width.short}
+                        inputWidht={TAILWIND_CONTANTS.width.medium}
+                        height={TAILWIND_CONTANTS.height.small}
+                        fontWeight={TAILWIND_CONTANTS.fontSize.extraBold}
+                        submitButtonColor={TAILWIND_CONTANTS.backGroundColors.gray}
+                    />
+                </Product.GroupFour>
+
+                <Product.GroupFour isDetailsPage={true}>
                     <Product.Description isDetailsPage={true}>
                         {product.description.charAt(0).toUpperCase() + product.description.slice(1)}
                     </Product.Description>
-                </Product.GroupThree>
+                </Product.GroupFour>
             </Product.RightPane>
         </Product>
     );

@@ -105,6 +105,8 @@ export default function Registration() {
                     error={
                         !isValidEmail && emailTouched ? "Please enter a valid email address" : null
                     }
+                    rounded
+                    focus
                 />
 
                 <Form.Input
@@ -115,6 +117,8 @@ export default function Registration() {
                     placeholder="Password"
                     icon={passwordShown ? ShowIcon : HideIcon}
                     iconFunction={handleShowPassword}
+                    rounded
+                    focus
                 />
 
                 <Form.Input
@@ -126,9 +130,11 @@ export default function Registration() {
                     icon={confirmPasswordShown ? ShowIcon : HideIcon}
                     iconFunction={handleShowConfirmPassword}
                     error={!passwordsMatch ? "Passwords must match" : null}
+                    rounded
+                    focus
                 />
 
-                <Form.Button type="submit" name="submit" disabled={disabled}>
+                <Form.Button type="submit" name="submit" disabled={disabled} rounded border>
                     Sign Up
                 </Form.Button>
             </Form>
