@@ -38,63 +38,70 @@ export default function QuantityBox({
     const setSubmitButtonColor = submitButtonColor ? submitButtonColor : "bg-white";
 
     return (
-        <div className={styles.quantity_box__container}>
-            <Button
-                type="button"
-                name="add_quantity"
-                clickFunction={() => {
-                    +quantity === lowerLimit ? null : decreaseQuantity();
-                }}
-                backgroundcolor={setQuantityButtonColor}
-                height={setHeight}
-                widht={quantityButtonWidht}
-                fontWeight={fontWeight}
-                fontColor={quantityButtonFontColor}
-            >
-                -
-            </Button>
+        <>
+            <div className={styles.quantity_box__container}>
+                <Button
+                    type="button"
+                    name="add_quantity"
+                    clickFunction={() => {
+                        +quantity === lowerLimit ? null : decreaseQuantity();
+                    }}
+                    backgroundcolor={setQuantityButtonColor}
+                    height={setHeight}
+                    widht={quantityButtonWidht}
+                    fontWeight={fontWeight}
+                    fontColor={quantityButtonFontColor}
+                >
+                    -
+                </Button>
 
-            <Input
-                placeholder={quantity}
-                value={quantity}
-                onChangeFunction={changeQuantity}
-                name="product_quantity"
-                type="number"
-                center
-                height={setHeight}
-                width={inputWidht}
-                max={higherLimit}
-                min={lowerLimit}
-            />
+                <Input
+                    placeholder={quantity}
+                    value={quantity}
+                    onChangeFunction={changeQuantity}
+                    name="product_quantity"
+                    type="number"
+                    center
+                    height={setHeight}
+                    width={inputWidht}
+                    max={higherLimit}
+                    min={lowerLimit}
+                />
 
-            <Button
-                type="button"
-                name="add_quantity"
-                clickFunction={() => {
-                    +quantity === higherLimit ? null : increaseQuantity();
-                }}
-                backgroundcolor={setQuantityButtonColor}
-                height={setHeight}
-                widht={quantityButtonWidht}
-                fontWeight={fontWeight}
-                fontColor={quantityButtonFontColor}
-            >
-                +
-            </Button>
+                <Button
+                    type="button"
+                    name="add_quantity"
+                    clickFunction={() => {
+                        +quantity === higherLimit ? null : increaseQuantity();
+                    }}
+                    backgroundcolor={setQuantityButtonColor}
+                    height={setHeight}
+                    widht={quantityButtonWidht}
+                    fontWeight={fontWeight}
+                    fontColor={quantityButtonFontColor}
+                >
+                    +
+                </Button>
 
-            <Button
-                type="submit"
-                name="submit_quantity"
-                clickFunction={() => confirmQuantityFn(+quantity)}
-                backgroundcolor={setSubmitButtonColor}
-                height={setHeight}
-                widht={submitButtonWidht}
-                fontColor={submitButtonFontColor}
-                fontWeight={fontWeight}
-                disabled={+quantity < lowerLimit || +quantity > higherLimit ? true : false}
-            >
-                Add To Cart
-            </Button>
-        </div>
+                <Button
+                    type="submit"
+                    name="submit_quantity"
+                    clickFunction={() => confirmQuantityFn(+quantity)}
+                    backgroundcolor={setSubmitButtonColor}
+                    height={setHeight}
+                    widht={submitButtonWidht}
+                    fontColor={submitButtonFontColor}
+                    fontWeight={fontWeight}
+                    disabled={+quantity < lowerLimit || +quantity > higherLimit ? true : false}
+                >
+                    Add To Cart
+                </Button>
+            </div>
+            <div>
+                <span className="text-[0.7rem] text-slate-700">
+                    Minimum is {lowerLimit} and maximum is {higherLimit}
+                </span>
+            </div>
+        </>
     );
 }
