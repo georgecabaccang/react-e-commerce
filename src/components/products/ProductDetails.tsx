@@ -37,12 +37,13 @@ export default function ProductDetails({ product }: { product: IProducts }) {
                         higherLimit={100}
                         confirmQuantityFn={getQuantity}
                         quantityButtonColor={TAILWIND_CONTANTS.backGroundColors.white}
-                        quantityButtonFontColor={TAILWIND_CONTANTS.backGroundColors.gray}
+                        quantityButtonFontColor={TAILWIND_CONTANTS.fontColor.gray}
+                        submitButtonFontColor={TAILWIND_CONTANTS.fontColor.white}
                         submitButtonWidht={TAILWIND_CONTANTS.width.extraLong}
                         quantityButtonWidht={TAILWIND_CONTANTS.width.short}
                         inputWidht={TAILWIND_CONTANTS.width.medium}
                         height={TAILWIND_CONTANTS.height.small}
-                        fontWeight={TAILWIND_CONTANTS.fontSize.black}
+                        fontWeight={TAILWIND_CONTANTS.fontSize.extraBold}
                         submitButtonColor={TAILWIND_CONTANTS.backGroundColors.gray}
                     />
                 </Product.GroupFour>

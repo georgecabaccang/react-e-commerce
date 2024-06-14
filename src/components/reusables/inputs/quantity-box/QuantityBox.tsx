@@ -16,6 +16,7 @@ export default function QuantityBox({
     inputWidht,
     fontWeight,
     quantityButtonFontColor,
+    submitButtonFontColor,
 }: {
     confirmQuantityFn: (quantity: number) => void;
     lowerLimit: number;
@@ -28,6 +29,7 @@ export default function QuantityBox({
     submitButtonColor?: string;
     fontWeight?: string;
     quantityButtonFontColor: string;
+    submitButtonFontColor: string;
 }) {
     const { quantity, increaseQuantity, decreaseQuantity, changeQuantity } = useQuantityChanger();
 
@@ -75,6 +77,7 @@ export default function QuantityBox({
                 height={setHeight}
                 widht={quantityButtonWidht}
                 fontWeight={fontWeight}
+                fontColor={quantityButtonFontColor}
             >
                 +
             </Button>
@@ -86,6 +89,8 @@ export default function QuantityBox({
                 backgroundcolor={setSubmitButtonColor}
                 height={setHeight}
                 widht={submitButtonWidht}
+                fontColor={submitButtonFontColor}
+                fontWeight={fontWeight}
             >
                 Add To Cart
             </Button>
