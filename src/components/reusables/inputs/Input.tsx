@@ -16,6 +16,7 @@ interface IInput {
     rounded?: boolean;
     center?: boolean;
     height?: "h-small" | "h-medium" | "h-large";
+    focus?: boolean;
 }
 
 export default function Input({
@@ -33,6 +34,7 @@ export default function Input({
     rounded,
     center,
     height,
+    focus,
 }: IInput) {
     function handleInput(value: string) {
         onChangeFunction && onChangeFunction(value);
@@ -44,7 +46,7 @@ export default function Input({
                 <input
                     className={`${icon ? styles.input_password : styles.input} ${
                         !rounded && "rounded-none"
-                    } ${center && "text-center px-0"} ${height}`}
+                    } ${center && "text-center px-0"} ${height} ${!focus && "focus:shadow-none"}`}
                     value={value}
                     onChange={(event) => handleInput(event.target.value)}
                     name={name}

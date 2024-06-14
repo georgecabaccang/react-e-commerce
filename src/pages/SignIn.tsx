@@ -66,6 +66,7 @@ export default function SignIn() {
                     type="email"
                     placeholder="Email Address"
                     rounded
+                    focus
                 />
 
                 <Form.Input
@@ -79,7 +80,7 @@ export default function SignIn() {
                     link="/forgot-password"
                     linkName="Forgot your password?"
                     rounded
-                    height="h-small"
+                    focus
                 />
 
                 <Form.Button type="submit" name="submit" disabled={disabled} rounded={true} border>
