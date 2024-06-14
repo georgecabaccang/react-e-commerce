@@ -5,10 +5,14 @@ import styles from "./QuantityBox.module.css";
 
 export default function QuantityBox({
     quantity,
-    disabled,
+    increase,
+    decrease,
+    changeQuantity,
 }: {
     quantity: string;
-    disabled: boolean;
+    increase: () => void;
+    decrease: () => void;
+    changeQuantity: (value: string) => void;
 }) {
     return (
         <div className={styles.quantity_box__container}>
@@ -16,7 +20,8 @@ export default function QuantityBox({
                 <Button
                     type="button"
                     name="add_quantity"
-                    disabled={disabled}
+                    disabled={+quantity < 2 ? true : false}
+                    clickFunction={decrease}
                     backgroundcolor={"bg-white"}
                     height="h-small"
                 >
@@ -25,8 +30,9 @@ export default function QuantityBox({
             </div>
             <div className={styles.quantity_box__input}>
                 <Input
-                    placeholder="1"
+                    placeholder={quantity}
                     value={quantity}
+                    onChangeFunction={changeQuantity}
                     name="product_quantity"
                     type="input"
                     center
@@ -37,7 +43,8 @@ export default function QuantityBox({
                 <Button
                     type="button"
                     name="add_quantity"
-                    disabled={disabled}
+                    disabled={+quantity > 99 ? true : false}
+                    clickFunction={increase}
                     backgroundcolor={"bg-white"}
                     height="h-small"
                 >

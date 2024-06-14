@@ -1,8 +1,11 @@
+import useQuantityChanger from "../../hooks/helpers/useQuantityChanger";
 import { IProducts } from "../../pages/Store";
 import QuantityBox from "../reusables/inputs/quantity-box/QuantityBox";
 import Product from "./Product";
 
 export default function ProductDetails({ product }: { product: IProducts }) {
+    const { quantity, increaseQuantity, decreaseQuantity, changeQuantity } = useQuantityChanger();
+
     return (
         <Product productId={product.id} isDetailsPage={true}>
             <Product.LeftPane isDetailsPage={true}>
@@ -27,7 +30,12 @@ export default function ProductDetails({ product }: { product: IProducts }) {
                 </Product.GroupTwo>
 
                 <Product.GroupFour isDetailsPage={true}>
-                    <QuantityBox quantity="1" disabled={false} />
+                    <QuantityBox
+                        quantity={quantity}
+                        increase={increaseQuantity}
+                        decrease={decreaseQuantity}
+                        changeQuantity={changeQuantity}
+                    />
                 </Product.GroupFour>
 
                 <Product.GroupFour isDetailsPage={true}>
