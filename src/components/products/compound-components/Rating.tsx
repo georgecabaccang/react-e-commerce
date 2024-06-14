@@ -20,7 +20,7 @@ export default function Rating({
                 <img className={styles.product_item__rating__star} src={BlackStar} />
                 <span>{rate}</span>
             </div>
-            <span>Sold: {count}</span>
+            <span className={styles.product_rating__count}>{count} reviews</span>
         </div>
     );
 }

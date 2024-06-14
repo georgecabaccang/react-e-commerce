@@ -11,5 +11,5 @@ export default function Title({
 }) {
     const styles = isDetailsPage ? detailStyles : thumbStyles;
 
-    return <span className={styles.product_title}>{children}</span>;
+    return <div className={styles.product_title}>{children}</div>;
 }

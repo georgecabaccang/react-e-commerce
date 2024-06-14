@@ -31,7 +31,7 @@ export default function ProductDetails({ product }: { product: IProducts }) {
                     />
                 </Product.GroupTwo>
 
-                <Product.GroupFour isDetailsPage={true}>
+                <Product.GroupThree isDetailsPage={true}>
                     <QuantityBox
                         lowerLimit={1}
                         higherLimit={100}
@@ -46,7 +46,7 @@ export default function ProductDetails({ product }: { product: IProducts }) {
                         fontWeight={TAILWIND_CONTANTS.fontSize.extraBold}
                         submitButtonColor={TAILWIND_CONTANTS.backGroundColors.gray}
                     />
-                </Product.GroupFour>
+                </Product.GroupThree>
 
                 <Product.GroupFour isDetailsPage={true}>
                     <Product.Description isDetailsPage={true}>
