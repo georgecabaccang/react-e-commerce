@@ -91,6 +91,7 @@ export default function QuantityBox({
                 widht={submitButtonWidht}
                 fontColor={submitButtonFontColor}
                 fontWeight={fontWeight}
+                disabled={+quantity < lowerLimit || +quantity > higherLimit ? true : false}
             >
                 Add To Cart
             </Button>
