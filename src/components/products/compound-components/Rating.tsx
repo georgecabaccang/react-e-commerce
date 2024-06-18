@@ -1,5 +1,5 @@
 import BlackStar from "../../../assets/icons/star-black.png";
-import useStarInstantiator from "../../../hooks/helpers/useStarInstantiator";
+import Stars from "../../reusables/layouts/Stars";
 
 import thumbStyles from "../Product.module.css";
 import detailStyles from "../ProductDetails.module.css";
@@ -13,8 +13,6 @@ export default function Rating({
     count: number;
     isDetailsPage: boolean;
 }) {
-    const stars = useStarInstantiator();
-
     const styles = isDetailsPage ? detailStyles : thumbStyles;
 
     return (
@@ -23,7 +21,7 @@ export default function Rating({
                 {!isDetailsPage ? (
                     <img className={styles.product_item__rating__star} src={BlackStar} />
                 ) : (
-                    <div>{stars.instantiateStar(5, rate)}</div>
+                    <Stars maxRating={5} ratingOfProduct={rate} />
                 )}
                 <span>{rate}</span>
             </div>
