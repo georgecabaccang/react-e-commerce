@@ -1,4 +1,5 @@
 import BlackStar from "../../../assets/icons/star-black.png";
+import Stars from "../../reusables/layouts/Stars";
 
 import thumbStyles from "../Product.module.css";
 import detailStyles from "../ProductDetails.module.css";
@@ -17,10 +18,14 @@ export default function Rating({
     return (
         <div className={styles.product_item_rating__main}>
             <div className={styles.product_item__rating__container}>
-                <img className={styles.product_item__rating__star} src={BlackStar} />
+                {!isDetailsPage ? (
+                    <img className={styles.product_item__rating__star} src={BlackStar} />
+                ) : (
+                    <Stars maxRating={5} ratingOfProduct={rate} />
+                )}
                 <span>{rate}</span>
             </div>
-            <span>Sold: {count}</span>
+            <span className={styles.product_rating__count}>{count} reviews</span>
         </div>
     );
 }
