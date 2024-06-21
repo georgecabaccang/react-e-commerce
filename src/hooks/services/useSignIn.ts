@@ -1,10 +1,21 @@
 import axios, { AxiosError } from "axios";
 import { IUser, userSignedIn } from "../../store/userStore/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import URLS from "../../constants/urls";
+import { RootState } from "../../store/store";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import PAGES from "../../constants/pages";
 
 const useSignIn = () => {
+    const isSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        navigate(`/${PAGES.STORE}`, { replace: true });
+    }, [isSignedIn, navigate]);
 
     const signInUser = async (email: string, password: string) => {
         try {
