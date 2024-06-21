@@ -8,9 +8,7 @@ import SIZE from "../constants/images";
 import ContentContainer from "../components/reusables/layouts/ContentContainer";
 import { Link } from "react-router-dom";
 import PAGES from "../constants/pages";
-import { useSelector } from "react-redux";
 import useSignIn from "../hooks/services/useSignIn";
-import { RootState } from "../store/store";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
@@ -19,8 +17,6 @@ export default function SignIn() {
     const [disabled, setDisabled] = useState(true);
 
     const signIn = useSignIn();
-    const signedInUser = useSelector((state: RootState) => state.user.email);
-    const isSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
 
     function handleEmail(value: string) {
         setEmail(value);
@@ -39,10 +35,6 @@ export default function SignIn() {
         if (!email || !password) return console.log("oh no you don't");
         signIn(email, password);
     }
-
-    useEffect(() => {
-        console.log(signedInUser, isSignedIn);
-    }, [signedInUser, isSignedIn]);
 
     useEffect(() => {
         if (email && password) {
