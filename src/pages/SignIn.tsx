@@ -9,6 +9,10 @@ import ContentContainer from "../components/reusables/layouts/ContentContainer";
 import { Link } from "react-router-dom";
 import PAGES from "../constants/pages";
 import useSignIn from "../hooks/services/useSignIn";
+import useGetRequest from "../hooks/services/useGetRequest";
+import URLS from "../constants/urls";
+import { useDispatch } from "react-redux";
+import { loadCart } from "../store/cartStore/cartSlice";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
@@ -16,7 +20,9 @@ export default function SignIn() {
     const [passwordShown, setPasswordShown] = useState(false);
     const [disabled, setDisabled] = useState(true);
 
+    const dispatch = useDispatch();
     const signIn = useSignIn();
+    const getCart = useGetRequest();
 
     function handleEmail(value: string) {
         setEmail(value);
@@ -33,7 +39,10 @@ export default function SignIn() {
     async function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
         if (!email || !password) return console.log("oh no you don't");
-        signIn(email, password);
+        const user = await signIn(email, password);
+        await getCart(`${URLS.SERVER_CART}/${user?.email}/${user?._id}`).then((response) => {
+            dispatch(loadCart(response.data));
+        });
     }
 
     useEffect(() => {

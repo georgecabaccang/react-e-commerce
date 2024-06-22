@@ -24,8 +24,9 @@ const useSignIn = () => {
                 password: password,
             });
             const user = data.data as IUser;
-
+            
             dispatch(userSignedIn(user));
+            return user;
         } catch (error) {
             if (error instanceof AxiosError) {
                 console.log(error.response?.data);
