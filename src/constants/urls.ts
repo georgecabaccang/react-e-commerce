@@ -1,11 +1,17 @@
 enum URLS {
+    // request methods
+    GET = "get",
+    POST = "post",
+    PATCH = "patch",
+
+    // server requests
     SERVER_BASE = "http://localhost:8002",
-    SEVER_USER_SIGN_IN = `${SERVER_BASE}/user/sign-in`,
-    SEVER_USER_SIGN_UP = `${SERVER_BASE}/user/sign-up`,
+    USER_SIGN_IN = "user/sign-in",
+    USER_SIGN_UP = "user/sign-up",
+    GET_CART = "cart",
 
     // FAKE PRODUCTS API
-    STORE_PRODUCTS = "https://fakestoreapi.com/products",
-    STORE_SINGLE_PRODUCT = "https://fakestoreapi.com/products/",
+    FAKE_PRODUCTS_BASE = "https://fakestoreapi.com/products",
 }
 
 export default URLS;

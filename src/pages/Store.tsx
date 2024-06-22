@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import URLS from "../constants/urls";
-import axios from "axios";
 import ProductList from "../components/products/ProductList";
+import useAPIRequest from "../hooks/services/useAPIRequest";
 
 export interface IProducts {
     id: number;
@@ -19,14 +19,16 @@ export interface IProducts {
 export default function Store() {
     const [products, setProducts] = useState<IProducts[] | null>(null);
 
-    async function getProducts() {
-        const { data } = await axios.get(URLS.STORE_PRODUCTS);
-        return setProducts(data);
-    }
+    const request = useAPIRequest();
+
+    const getProducts = useCallback(async () => {
+        const products = await request(URLS.GET, URLS.FAKE_PRODUCTS_BASE, "/");
+        return setProducts(products);
+    }, [request, setProducts]);
 
     useEffect(() => {
         getProducts();
-    }, []);
+    }, [getProducts]);
 
     if (!products) return "Loading";
 

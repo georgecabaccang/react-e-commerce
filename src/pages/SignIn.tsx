@@ -30,7 +30,7 @@ export default function SignIn() {
         setPasswordShown((prev) => !prev);
     }
 
-    async function handleSubmit(event: React.FormEvent) {
+    function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
         if (!email || !password) return console.log("oh no you don't");
         signIn(email, password);
