@@ -1,11 +1,19 @@
 import TAILWIND_CONTANTS from "../../constants/tailwind";
+import useAddToCart from "../../hooks/wrapers/cart/useAddToCart";
 import { IProducts } from "../../pages/Store";
 import QuantityBox from "../reusables/inputs/quantity-box/QuantityBox";
 import Product from "./Product";
 
 export default function ProductDetails({ product }: { product: IProducts }) {
-    function getQuantity(quantity: number) {
-        console.log(quantity);
+    const addToCart = useAddToCart();
+
+    function handleAddToCart(quantity: number) {
+        addToCart({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            quantity: quantity,
+        });
     }
 
     return (
@@ -35,7 +43,7 @@ export default function ProductDetails({ product }: { product: IProducts }) {
                     <QuantityBox
                         lowerLimit={1}
                         higherLimit={100}
-                        confirmQuantityFn={getQuantity}
+                        confirmQuantityFn={handleAddToCart}
                         quantityButtonColor={TAILWIND_CONTANTS.backGroundColors.white}
                         quantityButtonFontColor={TAILWIND_CONTANTS.fontColor.gray}
                         submitButtonFontColor={TAILWIND_CONTANTS.fontColor.white}
