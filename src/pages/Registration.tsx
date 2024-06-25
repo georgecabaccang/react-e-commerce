@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Form from "../components/reusables/form/Form";
 import ShowIcon from "../assets/icons/view.png";
 import HideIcon from "../assets/icons/hidden.png";
@@ -10,8 +10,8 @@ import { Link } from "react-router-dom";
 import PAGES from "../constants/pages";
 import * as EmailValidator from "email-validator";
 import useSignIn from "../hooks/services/useSignIn";
-import axios, { AxiosError } from "axios";
 import URLS from "../constants/urls";
+import useAPIRequest from "../hooks/services/useAPIRequest";
 
 export default function Registration() {
     const [email, setEmail] = useState("");
@@ -27,6 +27,7 @@ export default function Registration() {
     const [disabled, setDisabled] = useState(true);
 
     const signIn = useSignIn();
+    const request = useAPIRequest();
 
     function handleEmail(value: string) {
         setEmail(value);
@@ -57,18 +58,12 @@ export default function Registration() {
 
         if (!email || !password || !confirmPassword) return console.log("really?");
 
-        try {
-            await axios.post(URLS.SEVER_USER_SIGN_UP, {
-                email: email,
-                password: password,
-            });
+        await request(URLS.POST, URLS.SERVER_BASE, URLS.USER_SIGN_UP, {
+            email: email,
+            password: password,
+        });
 
-            signIn(email, password);
-        } catch (error) {
-            if (error instanceof AxiosError) {
-                console.log(error.response?.data);
-            }
-        }
+        signIn(email, password);
     }
 
     useEffect(() => {
@@ -98,7 +93,9 @@ export default function Registration() {
                 <Form.Input
                     name="email"
                     value={email}
-                    onChangeFunction={handleEmail}
+                    onChangeFunction={(event: ChangeEvent<HTMLInputElement>) =>
+                        handleEmail(event.target.value)
+                    }
                     type="email"
                     placeholder="Email Address"
                     onClickFunction={handleTouchEmail}
@@ -112,7 +109,9 @@ export default function Registration() {
                 <Form.Input
                     name="password"
                     value={password}
-                    onChangeFunction={handlePassword}
+                    onChangeFunction={(event: ChangeEvent<HTMLInputElement>) =>
+                        handlePassword(event.target.value)
+                    }
                     type={passwordShown ? "text" : "password"}
                     placeholder="Password"
                     icon={passwordShown ? ShowIcon : HideIcon}
@@ -124,7 +123,9 @@ export default function Registration() {
                 <Form.Input
                     name="confirm_Password"
                     value={confirmPassword}
-                    onChangeFunction={handleConfirmPassword}
+                    onChangeFunction={(event: ChangeEvent<HTMLInputElement>) =>
+                        handleConfirmPassword(event.target.value)
+                    }
                     type={confirmPasswordShown ? "text" : "password"}
                     placeholder="Confirm Password"
                     icon={confirmPasswordShown ? ShowIcon : HideIcon}

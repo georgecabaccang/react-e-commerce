@@ -1,9 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IProducts } from "../../pages/Store";
 
-interface IItem {
-    id: number;
-    title: string;
-    price: number;
+export interface IItem extends IProducts {
     quantity: number;
 }
 

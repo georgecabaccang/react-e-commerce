@@ -11,6 +11,7 @@ const ProductPage = lazy(() => import("./pages/ProductPage"));
 const SignIn = lazy(() => import("./pages/SignIn"));
 const Registration = lazy(() => import("./pages/Registration"));
 const LoggedInRoutes = lazy(() => import("./components/protectedRoutes/LoggedInRoutes"));
+const Cart = lazy(() => import("./pages/Cart"));
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                                 path={`/${PAGES.PRODUCT}/:productId`}
                                 element={<ProductPage />}
                             />
+                            <Route path={`/${PAGES.CART}`} element={<Cart />} />
                         </Route>
                         <Route path={`/${PAGES.SIGNIN}`} element={<SignIn />} />
                         <Route path={`/${PAGES.REGISTRATION}`} element={<Registration />} />

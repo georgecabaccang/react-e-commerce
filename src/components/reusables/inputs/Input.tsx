@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import styles from "./Input.module.css";
+import { ChangeEvent } from "react";
 
 interface IInput {
     placeholder: string;
     value: string | number;
-    onChangeFunction?: (value: string) => void;
+    onChangeFunction?: (event: ChangeEvent<HTMLInputElement>) => void;
     name: string;
     type: string;
     icon?: string;
@@ -42,8 +43,8 @@ export default function Input({
     max,
     min,
 }: IInput) {
-    function handleInput(value: string) {
-        onChangeFunction && onChangeFunction(value);
+    function handleInput(event: ChangeEvent<HTMLInputElement>) {
+        onChangeFunction && onChangeFunction(event);
     }
 
     return (
@@ -56,7 +57,7 @@ export default function Input({
                         !focus && "focus:shadow-none"
                     }`}
                     value={value}
-                    onChange={(event) => handleInput(event.target.value)}
+                    onChange={(event) => handleInput(event)}
                     name={name}
                     type={type}
                     placeholder={placeholder}
