@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const useQuantityChanger = () => {
     const [quantity, setQuantity] = useState(1);
@@ -11,9 +11,12 @@ const useQuantityChanger = () => {
         setQuantity((prev) => prev - 1);
     }
 
-    function changeQuantity(amountEntered: string) {
-        setQuantity(+amountEntered);
-    }
+    const changeQuantity = useCallback(
+        (amountEntered: string) => {
+            setQuantity(+amountEntered);
+        },
+        [setQuantity]
+    );
 
     return {
         quantity: quantity.toString(),

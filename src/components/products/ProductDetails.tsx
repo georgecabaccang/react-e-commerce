@@ -53,6 +53,7 @@ export default function ProductDetails({ product }: { product: IProducts }) {
                         height={TAILWIND_CONTANTS.height.small}
                         fontWeight={TAILWIND_CONTANTS.fontSize.extraBold}
                         submitButtonColor={TAILWIND_CONTANTS.backGroundColors.gray}
+                        inCart
                     />
                 </Product.GroupThree>
 

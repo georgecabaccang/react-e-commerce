@@ -22,9 +22,10 @@ export default function Store() {
     const request = useAPIRequest();
 
     const getProducts = useCallback(async () => {
-        const products = await request(URLS.GET, URLS.FAKE_PRODUCTS_BASE, "/");
-        return setProducts(products);
-    }, [request, setProducts]);
+        if (products) return;
+        const loadedProducts = await request(URLS.GET, URLS.FAKE_PRODUCTS_BASE, "/");
+        return setProducts(loadedProducts);
+    }, [request, setProducts, products]);
 
     useEffect(() => {
         getProducts();
