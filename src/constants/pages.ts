@@ -4,6 +4,7 @@ enum PAGES {
     REGISTRATION = "registration",
     STORE = "store",
     PRODUCT = "products",
+    CART = "cart",
 }
 
 export default PAGES;

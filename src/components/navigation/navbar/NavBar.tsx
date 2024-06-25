@@ -23,6 +23,9 @@ export default function NavBar() {
                     <Link to={PAGES.STORE}>Store</Link>
                 </li>
                 <li>
+                    <Link to={PAGES.CART}>Cart</Link>
+                </li>
+                <li>
                     <Link to={PAGES.SIGNIN}>Sign In</Link>
                 </li>
                 <li>
