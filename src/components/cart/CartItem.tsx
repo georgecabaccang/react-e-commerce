@@ -38,7 +38,12 @@ export default function CartItem({ item }: { item: IItem }) {
             <CartItem.RightPane>
                 <CartItem.Title>{itemDetails.title}</CartItem.Title>
                 <CartItem.Price>{itemDetails.price.toFixed(2)}</CartItem.Price>
-                <CartItem.Quantity quantity={item.quantity} item={item} />
+                <CartItem.Quantity
+                    quantity={item.quantity}
+                    item={item}
+                    lowerLimit={1}
+                    higherLimit={100}
+                />
             </CartItem.RightPane>
         </div>
     );
