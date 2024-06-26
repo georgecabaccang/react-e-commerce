@@ -38,17 +38,24 @@ export default function QuantityBox({
     inCart?: boolean;
     currentQuantity?: number;
 }) {
-    const { quantity, increaseQuantity, decreaseQuantity, changeQuantity } = useQuantityChanger();
+    const { quantity, increaseQuantity, decreaseQuantity, changeQuantity } = useQuantityChanger(
+        lowerLimit,
+        higherLimit
+    );
 
     function changeQuantityByOne(operation: "increase" | "decrease") {
         switch (operation) {
             case "increase":
                 increaseQuantity();
-                changeDBQuantityFn ? changeDBQuantityFn(+quantity + 1) : null;
+                +quantity < higherLimit && changeDBQuantityFn
+                    ? changeDBQuantityFn(+quantity + 1)
+                    : null;
                 break;
             case "decrease":
                 decreaseQuantity();
-                changeDBQuantityFn ? changeDBQuantityFn(+quantity - 1) : null;
+                +quantity > lowerLimit && changeDBQuantityFn
+                    ? changeDBQuantityFn(+quantity - 1)
+                    : null;
                 break;
         }
     }

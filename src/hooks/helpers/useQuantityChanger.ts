@@ -1,21 +1,27 @@
 import { useCallback, useState } from "react";
 
-const useQuantityChanger = () => {
+const useQuantityChanger = (lowerLimit: number, higherLimit: number) => {
     const [quantity, setQuantity] = useState(1);
 
     function increaseQuantity() {
-        setQuantity((prev) => prev + 1);
+        quantity > higherLimit - 1 ? null : setQuantity((prev) => prev + 1);
     }
 
     function decreaseQuantity() {
-        setQuantity((prev) => prev - 1);
+        quantity < lowerLimit + 1 ? null : setQuantity((prev) => prev - 1);
     }
 
     const changeQuantity = useCallback(
         (amountEntered: string) => {
+            if (+amountEntered < lowerLimit) {
+                return setQuantity(lowerLimit);
+            }
+            if (+amountEntered > higherLimit) {
+                return setQuantity(higherLimit);
+            }
             setQuantity(+amountEntered);
         },
-        [setQuantity]
+        [setQuantity, lowerLimit, higherLimit]
     );
 
     return {

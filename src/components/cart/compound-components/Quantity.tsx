@@ -1,13 +1,24 @@
 import styles from "../CartItemList.module.css";
 import QuantityBox from "../../reusables/inputs/quantity-box/QuantityBox";
-import useAddToCart from "../../../hooks/wrapers/cart/useAddToCart";
 import { IItem } from "../../../store/cartStore/cartSlice";
+import useChangeQuantity from "../../../hooks/wrapers/cart/useChangeQuantity";
 
-export default function Quantity({ quantity, item }: { quantity: number; item: IItem }) {
-    const changeQuantity = useAddToCart();
+export default function Quantity({
+    quantity,
+    item,
+    lowerLimit,
+    higherLimit,
+}: {
+    quantity: number;
+    item: IItem;
+    lowerLimit: number;
+    higherLimit: number;
+}) {
+    const { newQuantity, changeQuantity } = useChangeQuantity();
 
     async function changeDBQuantity(quantity: number) {
-        console.log(quantity);
+        console.log(newQuantity);
+        // if (newQuantity < lowerLimit || newQuantity > higherLimit) return;
         await changeQuantity({
             id: item.id,
             title: item.title,
@@ -15,13 +26,14 @@ export default function Quantity({ quantity, item }: { quantity: number; item: I
             quantity: quantity,
         });
     }
+
     return (
         <div className={styles.cart_item__quantity}>
             <span>Quantity:</span>
             <QuantityBox
-                lowerLimit={1}
-                higherLimit={100}
-                currentQuantity={quantity}
+                lowerLimit={lowerLimit}
+                higherLimit={higherLimit}
+                currentQuantity={newQuantity ? newQuantity : quantity}
                 changeDBQuantityFn={changeDBQuantity}
             />
         </div>
