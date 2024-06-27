@@ -47,15 +47,11 @@ export default function QuantityBox({
         switch (operation) {
             case "increase":
                 increaseQuantity();
-                +quantity < higherLimit && changeDBQuantityFn
-                    ? changeDBQuantityFn(+quantity + 1)
-                    : null;
+                changeDBQuantityFn ? changeDBQuantityFn(+quantity + 1) : null;
                 break;
             case "decrease":
                 decreaseQuantity();
-                +quantity > lowerLimit && changeDBQuantityFn
-                    ? changeDBQuantityFn(+quantity - 1)
-                    : null;
+                changeDBQuantityFn ? changeDBQuantityFn(+quantity - 1) : null;
                 break;
         }
     }
