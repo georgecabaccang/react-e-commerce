@@ -3,6 +3,7 @@ import QuantityBox from "../../reusables/inputs/quantity-box/QuantityBox";
 import { IItem } from "../../../store/cartStore/cartSlice";
 import useChangeQuantity from "../../../hooks/wrapers/cart/useChangeQuantity";
 import { useCallback } from "react";
+import TAILWIND_CONTANTS from "../../../constants/tailwind";
 
 export default function Quantity({
     quantity,
@@ -30,17 +31,6 @@ export default function Quantity({
         [changeQuantity, item, lowerLimit, higherLimit]
     );
 
-    // async function changeDBQuantity(quantity: number) {
-    //     console.log(newQuantity);
-    //     if (newQuantity < lowerLimit || newQuantity > higherLimit) return;
-    //     await changeQuantity({
-    //         id: item.id,
-    //         title: item.title,
-    //         price: item.price,
-    //         quantity: quantity,
-    //     });
-    // }
-
     return (
         <div className={styles.cart_item__quantity}>
             <span>Quantity:</span>
@@ -49,6 +39,10 @@ export default function Quantity({
                 higherLimit={higherLimit}
                 currentQuantity={newQuantity ? newQuantity : quantity}
                 changeDBQuantityFn={changeDBQuantity}
+                height={TAILWIND_CONTANTS.height.xs}
+                quantityButtonColor={TAILWIND_CONTANTS.backGroundColors.gray}
+                quantityButtonWidht={TAILWIND_CONTANTS.width.xs}
+                inputWidht={TAILWIND_CONTANTS.width.short}
             />
         </div>
     );

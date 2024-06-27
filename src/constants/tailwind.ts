@@ -42,6 +42,7 @@ const TAILWIND_CONTANTS = {
     },
 
     height: {
+        xs: "h-[2.3rem]",
         small: "h-[3.3rem]",
         medium: "h-[4.8rem]",
         large: "h-[6.1rem]",
@@ -49,6 +50,7 @@ const TAILWIND_CONTANTS = {
     },
 
     width: {
+        xs: "w-[2.3rem]",
         short: "w-[3.3rem]",
         medium: "w-[4.8rem]",
         long: "w-[6.1rem]",

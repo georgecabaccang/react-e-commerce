@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect } from "react";
+import { useEffect } from "react";
 import useQuantityChanger from "../../../../hooks/helpers/useQuantityChanger";
 import Button from "../../buttons/Button";
 import Input from "../Input";
@@ -43,7 +43,7 @@ export default function QuantityBox({
         higherLimit
     );
 
-    function changeQuantityByOne(operation: "increase" | "decrease") {
+    function changeQuantityWrapper(operation: "increase" | "decrease" | "by", amount?: string) {
         switch (operation) {
             case "increase":
                 increaseQuantity();
@@ -52,6 +52,10 @@ export default function QuantityBox({
             case "decrease":
                 decreaseQuantity();
                 changeDBQuantityFn ? changeDBQuantityFn(+quantity - 1) : null;
+                break;
+            default:
+                changeQuantity(amount!);
+                changeDBQuantityFn ? changeDBQuantityFn(+amount!) : null;
                 break;
         }
     }
@@ -72,7 +76,7 @@ export default function QuantityBox({
                 <Button
                     type="button"
                     name="add_quantity"
-                    clickFunction={() => changeQuantityByOne("decrease")}
+                    clickFunction={() => changeQuantityWrapper("decrease")}
                     backgroundcolor={setQuantityButtonColor}
                     height={setHeight}
                     widht={quantityButtonWidht}
@@ -85,9 +89,9 @@ export default function QuantityBox({
                 <Input
                     placeholder={quantity}
                     value={quantity}
-                    onChangeFunction={(event: ChangeEvent<HTMLInputElement>) => {
-                        changeQuantity(event.target.value);
-                        changeDBQuantityFn ? changeDBQuantityFn(+event.target.value) : null;
+                    onChangeFunction={changeQuantity}
+                    onBlurFunction={(value: string) => {
+                        changeQuantityWrapper("by", value);
                     }}
                     name="product_quantity"
                     type="number"
@@ -101,7 +105,7 @@ export default function QuantityBox({
                 <Button
                     type="button"
                     name="add_quantity"
-                    clickFunction={() => changeQuantityByOne("increase")}
+                    clickFunction={() => changeQuantityWrapper("increase")}
                     backgroundcolor={setQuantityButtonColor}
                     height={setHeight}
                     widht={quantityButtonWidht}

@@ -19,7 +19,6 @@
     padding: 1.3rem 0;
     border-bottom: 1px solid hsla(0, 0%, 0%, 0.07);
     min-height: 7rem;
-    max-height: 7rem;
 }
 
 .cart_item__pane_left {
@@ -49,9 +48,16 @@
 }
 
 .cart_item__price {
-    font-size: small;
+    display: flex;
+    font-size: 1rem;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    min-width: 7rem;
+    max-width: 7rem;
 }
 
 .cart_item__quantity {
     font-size: small;
+    max-width: 12rem;
 }
