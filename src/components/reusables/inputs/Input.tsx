@@ -3,17 +3,18 @@ import styles from "./Input.module.css";
 import { ChangeEvent } from "react";
 
 interface IInput {
+    onChangeFunction?: (value: string) => void;
+    iconFunction?: () => void;
+    onClickFunction?: () => void;
+    onBlurFunction?: (value: string) => void;
     placeholder: string;
     value: string | number;
-    onChangeFunction?: (event: ChangeEvent<HTMLInputElement>) => void;
     name: string;
     type: string;
     icon?: string;
-    iconFunction?: () => void;
     link?: string;
     linkName?: string;
     error?: string | null;
-    onClickFunction?: () => void;
     rounded?: boolean;
     center?: boolean;
     height?: string;
@@ -24,17 +25,18 @@ interface IInput {
 }
 
 export default function Input({
+    onChangeFunction,
+    iconFunction,
+    onClickFunction,
+    onBlurFunction,
     placeholder,
     value,
-    onChangeFunction,
     name,
     type,
     icon,
-    iconFunction,
     link,
     linkName,
     error,
-    onClickFunction,
     rounded,
     center,
     height,
@@ -43,8 +45,17 @@ export default function Input({
     max,
     min,
 }: IInput) {
-    function handleInput(event: ChangeEvent<HTMLInputElement>) {
-        onChangeFunction && onChangeFunction(event);
+    function handleInput(value: string) {
+        onChangeFunction && onChangeFunction(value);
+    }
+
+    function handleBlur(value: string) {
+        onBlurFunction && onBlurFunction(value);
+    }
+
+    function handleOnFocus(event: ChangeEvent<HTMLInputElement>) {
+        onClickFunction && onClickFunction();
+        event.target.select();
     }
 
     return (
@@ -57,11 +68,12 @@ export default function Input({
                         !focus && "focus:shadow-none"
                     }`}
                     value={value}
-                    onChange={(event) => handleInput(event)}
+                    onChange={(event) => handleInput(event.target.value)}
+                    onBlur={(event) => handleBlur(event.target.value)}
                     name={name}
                     type={type}
                     placeholder={placeholder}
-                    onFocus={onClickFunction}
+                    onFocus={handleOnFocus}
                     max={max}
                     min={min}
                 />

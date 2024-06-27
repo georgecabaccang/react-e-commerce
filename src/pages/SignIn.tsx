@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Form from "../components/reusables/form/Form";
 import ShowIcon from "../assets/icons/view.png";
 import HideIcon from "../assets/icons/hidden.png";
@@ -54,9 +54,7 @@ export default function SignIn() {
                 <Form.Input
                     name="email"
                     value={email}
-                    onChangeFunction={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleEmail(event.target.value)
-                    }
+                    onChangeFunction={handleEmail}
                     type="email"
                     placeholder="Email Address"
                     rounded
@@ -66,9 +64,7 @@ export default function SignIn() {
                 <Form.Input
                     name="password"
                     value={password}
-                    onChangeFunction={(event: ChangeEvent<HTMLInputElement>) =>
-                        handlePassword(event.target.value)
-                    }
+                    onChangeFunction={handlePassword}
                     type={passwordShown ? "text" : "password"}
                     placeholder="Password"
                     icon={passwordShown ? ShowIcon : HideIcon}

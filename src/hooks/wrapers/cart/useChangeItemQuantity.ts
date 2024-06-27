@@ -1,15 +1,17 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useAPIRequest from "../../services/useAPIRequest";
 import URLS from "../../../constants/urls";
 import { RootState } from "../../../store/store";
 import { useState } from "react";
-import { IItem } from "../../../store/cartStore/cartSlice";
+import { IItem, updateQuantity } from "../../../store/cartStore/cartSlice";
 
-const useChangeQuantity = () => {
+const useChangeItemQuantity = () => {
     const [newQuantity, setNewQuantity] = useState<number>(0);
 
     const userId = useSelector((state: RootState) => state.user._id);
     const userEmail = useSelector((state: RootState) => state.user.email);
+
+    const dispatch = useDispatch();
 
     const request = useAPIRequest();
 
@@ -37,9 +39,10 @@ const useChangeQuantity = () => {
         );
 
         setNewQuantity(data.quantity);
+        dispatch(updateQuantity({ id: id, quantity: data.quantity }));
     }
 
     return { newQuantity, changeQuantity };
 };
 
-export default useChangeQuantity;
+export default useChangeItemQuantity;
