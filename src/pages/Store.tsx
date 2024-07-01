@@ -19,7 +19,7 @@ export interface IProducts {
 export default function Store() {
     const [products, setProducts] = useState<IProducts[] | null>(null);
 
-    const request = useAPIRequest();
+    const { request, abort } = useAPIRequest();
 
     const getProducts = useCallback(async () => {
         if (products) return;
@@ -30,6 +30,10 @@ export default function Store() {
     useEffect(() => {
         getProducts();
     }, [getProducts]);
+
+    useEffect(() => {
+        return () => abort();
+    });
 
     if (!products) return "Loading";
 

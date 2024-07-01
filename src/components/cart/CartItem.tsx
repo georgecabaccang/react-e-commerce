@@ -14,7 +14,7 @@ import { IItem } from "../../store/cartStore/cartSlice";
 export default function CartItem({ item }: { item: IItem }) {
     const [itemDetails, setItemDetails] = useState<IItem | null>(null);
 
-    const request = useAPIRequest();
+    const { request, abort } = useAPIRequest();
 
     const getItemDetails = useCallback(async () => {
         if (itemDetails) return;
@@ -24,7 +24,9 @@ export default function CartItem({ item }: { item: IItem }) {
 
     useEffect(() => {
         getItemDetails();
-    }, [getItemDetails]);
+        return () => abort();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     if (!itemDetails) {
         return "Loading...";

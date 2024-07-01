@@ -13,7 +13,7 @@ const useChangeItemQuantity = () => {
 
     const dispatch = useDispatch();
 
-    const request = useAPIRequest();
+    const { request, abort } = useAPIRequest();
 
     async function changeQuantity({
         id,
@@ -42,7 +42,7 @@ const useChangeItemQuantity = () => {
         dispatch(updateQuantity({ id: id, quantity: data.quantity }));
     }
 
-    return { newQuantity, changeQuantity };
+    return { newQuantity, changeQuantity, abort };
 };
 
 export default useChangeItemQuantity;

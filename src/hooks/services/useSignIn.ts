@@ -11,7 +11,7 @@ import { loadCart } from "../../store/cartStore/cartSlice";
 const useSignIn = () => {
     const isSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
     const dispatch = useDispatch();
-    const request = useAPIRequest();
+    const { request, abort } = useAPIRequest();
 
     const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ const useSignIn = () => {
             dispatch(userSignedIn(user));
         });
     };
-    return signInUser;
+    return { signInUser, abort };
 };
 
 export default useSignIn;
