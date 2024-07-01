@@ -9,7 +9,7 @@ const useAddToCart = () => {
     const userEmail = useSelector((state: RootState) => state.user.email);
 
     const dispatch = useDispatch();
-    const request = useAPIRequest();
+    const { request, abort } = useAPIRequest();
 
     const addToCart = async ({
         id,
@@ -36,7 +36,7 @@ const useAddToCart = () => {
 
         dispatch(loadCart(response.data));
     };
-    return addToCart;
+    return { addToCart, abort };
 };
 
 export default useAddToCart;

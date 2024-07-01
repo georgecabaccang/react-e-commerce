@@ -9,7 +9,7 @@ export default function ProductPage() {
     const { productId } = useParams();
     const [productDetails, setProductDetails] = useState<IProducts | null>(null);
 
-    const request = useAPIRequest();
+    const { request, abort } = useAPIRequest();
 
     const loadProduct = useCallback(async () => {
         if (productDetails) return;
@@ -24,6 +24,11 @@ export default function ProductPage() {
     useEffect(() => {
         loadProduct();
     }, [loadProduct]);
+
+    useEffect(() => {
+        return () => abort();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     if (!productDetails) return "Loading";
 

@@ -26,8 +26,8 @@ export default function Registration() {
 
     const [disabled, setDisabled] = useState(true);
 
-    const signIn = useSignIn();
-    const request = useAPIRequest();
+    const { signInUser } = useSignIn();
+    const { request, abort } = useAPIRequest();
 
     function handleEmail(value: string) {
         setEmail(value);
@@ -63,8 +63,13 @@ export default function Registration() {
             password: password,
         });
 
-        signIn(email, password);
+        signInUser(email, password);
     }
+
+    useEffect(() => {
+        return () => abort();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         if (EmailValidator.validate(email)) {
