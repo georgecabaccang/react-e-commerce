@@ -22,6 +22,7 @@ export const cartSlice = createSlice({
         loadCart: (state, action: PayloadAction<ICart>) => {
             state._id = action.payload._id;
             state.items = action.payload.items;
+            localStorage.setItem("cartItems", JSON.stringify(action.payload.items));
         },
         updateQuantity: (state, action: PayloadAction<{ id: number; quantity: number }>) => {
             const itemIndex = state.items.findIndex((item) => {
