@@ -5,10 +5,12 @@ const useAPIRequest = () => {
     const [isLoading, setIsLoading] = useState(true);
     let abortController: AbortController = new AbortController();
 
+    // abort request on abort
     const abort = () => {
         abortController.abort();
     };
 
+    // change state of isLoading to false
     const stopLoading = useCallback(() => {
         setIsLoading(false);
     }, []);
@@ -29,7 +31,7 @@ const useAPIRequest = () => {
             return response.data;
         } catch (error) {
             if (error instanceof AxiosError) {
-                // console.log({ error: error.code });
+                console.log({ error: error.code });
             }
         }
     };
