@@ -42,7 +42,7 @@ export default function CartItem({ item }: { item: IItem }) {
                 <CartItem.Price>{itemDetails.price.toFixed(2)}</CartItem.Price>
                 <CartItem.Quantity
                     quantity={item.quantity}
-                    item={item}
+                    item={itemDetails}
                     lowerLimit={1}
                     higherLimit={100}
                 />

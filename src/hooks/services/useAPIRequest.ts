@@ -1,17 +1,19 @@
 import axios, { AxiosError } from "axios";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const useAPIRequest = () => {
     const [isLoading, setIsLoading] = useState(true);
     let abortController: AbortController = new AbortController();
 
+    // abort request on abort
     const abort = () => {
         abortController.abort();
     };
 
-    const stopLoading = () => {
+    // change state of isLoading to false
+    const stopLoading = useCallback(() => {
         setIsLoading(false);
-    };
+    }, []);
 
     const request = async <T>(method: string, baseURL: string, url: string, data?: T) => {
         abortController?.abort();

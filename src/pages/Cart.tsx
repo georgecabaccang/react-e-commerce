@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import useAPIRequest from "../hooks/services/useAPIRequest";
 import URLS from "../constants/urls";
 import { loadCart } from "../store/cartStore/cartSlice";
+import compareJSON from "../functions/compareJSON";
 
 export default function Cart() {
     const userId = useSelector((state: RootState) => state.user._id);
@@ -14,14 +15,11 @@ export default function Cart() {
     const dispatch = useDispatch();
     const { request, abort, loading, stopLoading } = useAPIRequest();
 
-    const cartItemsInLocalStorage = localStorage.getItem("cartItems");
-
-    console.log("in cart component");
-
     useEffect(() => {
-        if (JSON.stringify(cartItems) === cartItemsInLocalStorage) return stopLoading();
+        if (!loading) return;
+        // compare if locally saved cart items are equal, if so, stop the loading and return
+        if (compareJSON(cartItems)) return stopLoading();
 
-        getCart();
         async function getCart() {
             const cart = await request(
                 URLS.GET,
@@ -32,19 +30,10 @@ export default function Cart() {
             if (!cart) return;
             dispatch(loadCart(cart.data));
         }
+        getCart();
 
         return () => abort();
-    }, [
-        abort,
-        cartItems,
-        cartItemsInLocalStorage,
-        dispatch,
-        loading,
-        request,
-        stopLoading,
-        userEmail,
-        userId,
-    ]);
+    }, [abort, loading, dispatch, request, stopLoading, userEmail, userId, cartItems]);
 
     if (loading) {
         return "loading pa";
