@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const useAPIRequest = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -9,9 +9,9 @@ const useAPIRequest = () => {
         abortController.abort();
     };
 
-    const stopLoading = () => {
+    const stopLoading = useCallback(() => {
         setIsLoading(false);
-    };
+    }, []);
 
     const request = async <T>(method: string, baseURL: string, url: string, data?: T) => {
         abortController?.abort();
@@ -29,7 +29,7 @@ const useAPIRequest = () => {
             return response.data;
         } catch (error) {
             if (error instanceof AxiosError) {
-                console.log({ error: error.code });
+                // console.log({ error: error.code });
             }
         }
     };

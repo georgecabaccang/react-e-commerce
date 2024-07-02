@@ -16,8 +16,6 @@ export default function Cart() {
 
     const cartItemsInLocalStorage = localStorage.getItem("cartItems");
 
-    console.log("in cart component");
-
     useEffect(() => {
         if (JSON.stringify(cartItems) === cartItemsInLocalStorage) return stopLoading();
 
@@ -39,7 +37,6 @@ export default function Cart() {
         cartItems,
         cartItemsInLocalStorage,
         dispatch,
-        loading,
         request,
         stopLoading,
         userEmail,
