@@ -47,7 +47,7 @@
     font-size: small;
 }
 
-.cart_item__price {
+.cart_item__price, .cart_item__quantity__total {
     display: flex;
     font-size: 1rem;
     justify-content: center;
@@ -61,3 +61,14 @@
     font-size: small;
     max-width: 12rem;
 }
+
+.cart_item__quantity_and_total {
+    display: flex;
+}
+/* 
+.cart_item__quantity__total {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+} */
