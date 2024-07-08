@@ -1,42 +1,77 @@
 import axios, { AxiosError } from "axios";
-import { useCallback, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const useAPIRequest = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    let abortController: AbortController = new AbortController();
+type Method = "get" | "post" | "put" | "patch" | "delete";
 
-    // abort request on abort
-    const abort = () => {
-        abortController.abort();
+export interface IRequestConfig<T> {
+    method: Method;
+    baseURL: string;
+    url: string;
+    data?: T;
+}
+
+interface IResponse {
+    status: number;
+    message: string;
+    data: unknown;
+}
+
+interface IResponseError {
+    status: number;
+    message: string;
+}
+
+const useAPIRequest = <T>() => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [config, setConfig] = useState<IRequestConfig<T> | null>(null);
+    const [returnData, setReturnData] = useState<IResponse | null>(null);
+    const [requestError, setRequestError] = useState<IResponseError | null>(null);
+
+    const abortControllerRef = useRef(new AbortController());
+
+    const makeRequest = (method: Method, baseURL: string, url: string, data?: T) => {
+        setIsLoading(true);
+        setConfig({
+            method,
+            baseURL,
+            url,
+            data,
+        });
     };
 
-    // change state of isLoading to false
-    const stopLoading = useCallback(() => {
-        setIsLoading(false);
-    }, []);
+    useEffect(() => {
+        if (!isLoading) return;
+        request();
+        async function request() {
+            if (!config) return;
+            setRequestError(null);
+            try {
+                abortControllerRef.current.abort();
+                abortControllerRef.current = new AbortController();
 
-    const request = async <T>(method: string, baseURL: string, url: string, data?: T) => {
-        abortController?.abort();
-        abortController = new AbortController();
-
-        try {
-            const response = await axios({
-                method: method,
-                baseURL: baseURL,
-                url: url,
-                data: data,
-                signal: abortController.signal,
-            });
-            stopLoading();
-            return response.data;
-        } catch (error) {
-            if (error instanceof AxiosError) {
-                console.log({ error: error.code });
+                const response = await axios({
+                    method: config.method,
+                    baseURL: config.baseURL,
+                    url: config.url,
+                    data: config.data,
+                    signal: abortControllerRef.current.signal,
+                });
+                setReturnData(response.data);
+            } catch (error) {
+                if (error instanceof AxiosError) {
+                    const errorData: IResponseError = error.response?.data;
+                    if (!errorData) return;
+                    setRequestError({ status: errorData.status, message: errorData.message });
+                }
+            } finally {
+                setIsLoading(false);
             }
         }
-    };
 
-    return { request, abort, loading: isLoading, stopLoading: stopLoading };
+        return () => abortControllerRef.current.abort();
+    }, [config, isLoading]);
+
+    return { request: makeRequest, isLoading, data: returnData, requestError };
 };
 
 export default useAPIRequest;

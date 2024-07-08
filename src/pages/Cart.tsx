@@ -4,7 +4,7 @@ import CartItemList from "../components/cart/CartItemList";
 import { useEffect } from "react";
 import useAPIRequest from "../hooks/services/useAPIRequest";
 import URLS from "../constants/urls";
-import { loadCart } from "../store/cartStore/cartSlice";
+import { ICart, loadCart } from "../store/cartStore/cartSlice";
 import compareJSON from "../functions/compareJSON";
 
 export default function Cart() {
@@ -13,29 +13,22 @@ export default function Cart() {
 
     const cartItems = useSelector((state: RootState) => state.cart.items);
     const dispatch = useDispatch();
-    const { request, abort, loading, stopLoading } = useAPIRequest();
+    const { request, data, isLoading } = useAPIRequest();
 
     useEffect(() => {
-        if (!loading) return;
+        if (isLoading) return;
         // compare if locally saved cart items are equal, if so, stop the loading and return
-        if (compareJSON(cartItems)) return stopLoading();
+        if (compareJSON(cartItems)) return;
+        request(URLS.GET, URLS.SERVER_BASE, `${URLS.GET_CART}/${userEmail}/${userId}`);
+    }, [request, userEmail, userId, cartItems, data, isLoading]);
 
-        async function getCart() {
-            const cart = await request(
-                URLS.GET,
-                URLS.SERVER_BASE,
-                `${URLS.GET_CART}/${userEmail}/${userId}`
-            );
+    useEffect(() => {
+        if (!data) return;
+        const cartData = data.data as ICart;
+        dispatch(loadCart(cartData));
+    }, [data, dispatch]);
 
-            if (!cart) return;
-            dispatch(loadCart(cart.data));
-        }
-        getCart();
-
-        return () => abort();
-    }, [abort, loading, dispatch, request, stopLoading, userEmail, userId, cartItems]);
-
-    if (loading) {
+    if (isLoading) {
         return "loading pa";
     }
 

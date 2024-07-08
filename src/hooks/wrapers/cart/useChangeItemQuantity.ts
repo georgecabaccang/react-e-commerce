@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import useAPIRequest from "../../services/useAPIRequest";
 import URLS from "../../../constants/urls";
 import { RootState } from "../../../store/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IItem } from "../../../store/cartStore/cartSlice";
 import updateLocalStorage from "../../../functions/updateLocalStorage";
 
@@ -12,7 +12,7 @@ const useChangeItemQuantity = () => {
     const userId = useSelector((state: RootState) => state.user._id);
     const userEmail = useSelector((state: RootState) => state.user.email);
 
-    const { request, abort } = useAPIRequest();
+    const { request, isLoading, data } = useAPIRequest();
 
     async function changeQuantity({
         id,
@@ -25,7 +25,8 @@ const useChangeItemQuantity = () => {
         price: number;
         quantity: number;
     }) {
-        const { data }: { data: IItem } = await request(
+        if (isLoading) return;
+        request(
             URLS.PATCH,
             URLS.SERVER_BASE,
             `${URLS.GET_CART}/${userEmail}/${userId}/${id}/${quantity}`,
@@ -36,14 +37,18 @@ const useChangeItemQuantity = () => {
                 quantity: quantity,
             }
         );
-
-        // update locally saved item
-        updateLocalStorage(data);
-        
-        setNewQuantity(data.quantity);
     }
 
-    return { newQuantity, changeQuantity, abort };
+    useEffect(() => {
+        if (!data) return;
+        const itemDate = data.data as IItem;
+        // update locally saved item
+        updateLocalStorage(itemDate);
+
+        setNewQuantity(itemDate.quantity);
+    }, [data]);
+
+    return { newQuantity, changeQuantity };
 };
 
 export default useChangeItemQuantity;

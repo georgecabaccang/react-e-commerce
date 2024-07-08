@@ -6,34 +6,65 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PAGES from "../../constants/pages";
 import useAPIRequest from "./useAPIRequest";
-import { loadCart } from "../../store/cartStore/cartSlice";
+import { ICart, loadCart } from "../../store/cartStore/cartSlice";
 
 const useSignIn = () => {
     const isSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
     const dispatch = useDispatch();
-    const { request, abort } = useAPIRequest();
+    const {
+        request: userRequest,
+        isLoading: loadingUser,
+        data: user,
+        requestError: userRequestError,
+    } = useAPIRequest();
+    const {
+        request: cartRequest,
+        isLoading: loadingCart,
+        data: cart,
+        requestError: cartRequestError,
+    } = useAPIRequest();
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        navigate(`/${PAGES.STORE}`, { replace: true });
-    }, [isSignedIn, navigate]);
-
     const signInUser = async (email: string, password: string) => {
-        request(URLS.POST, URLS.SERVER_BASE, URLS.USER_SIGN_IN, {
+        userRequest(URLS.POST, URLS.SERVER_BASE, URLS.USER_SIGN_IN, {
             email: email,
             password: password,
-        }).then((userResponse) => {
-            const user = userResponse?.data as IUser;
-            request(URLS.GET, URLS.SERVER_BASE, `${URLS.GET_CART}/${user.email}/${user._id}`).then(
-                (cartResponse) => {
-                    dispatch(loadCart(cartResponse?.data));
-                }
-            );
-            dispatch(userSignedIn(user));
         });
     };
-    return { signInUser, abort };
+
+    useEffect(() => {
+        if (!user) return;
+        if (loadingCart) return;
+        if (cart) return;
+        const userDetails = user?.data as IUser;
+
+        cartRequest(
+            URLS.GET,
+            URLS.SERVER_BASE,
+            `${URLS.GET_CART}/${userDetails.email}/${userDetails._id}`
+        );
+    }, [cartRequest, dispatch, loadingCart, user, cart]);
+
+    useEffect(() => {
+        const userDetails = user?.data as IUser;
+        const cartDetails = cart?.data as ICart;
+        if (userRequestError || cartRequestError)
+            return console.log(userRequestError, cartRequestError);
+
+        if (!userDetails || !cartDetails) return;
+
+        dispatch(userSignedIn(userDetails));
+        dispatch(loadCart(cartDetails));
+    }, [user, cart, dispatch, userRequestError, cartRequestError]);
+
+    useEffect(() => {
+        if (loadingUser || loadingCart) return;
+        if (!user || !cart) return;
+        navigate(`/${PAGES.STORE}`, { replace: true });
+    }, [cart, isSignedIn, loadingCart, loadingUser, navigate, user]);
+
+    return { signInUser };
 };
 
 export default useSignIn;

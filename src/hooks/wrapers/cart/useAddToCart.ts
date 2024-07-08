@@ -2,14 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import useAPIRequest from "../../services/useAPIRequest";
 import URLS from "../../../constants/urls";
 import { RootState } from "../../../store/store";
-import { loadCart } from "../../../store/cartStore/cartSlice";
+import { ICart, loadCart } from "../../../store/cartStore/cartSlice";
+import { useEffect } from "react";
 
 const useAddToCart = () => {
     const userId = useSelector((state: RootState) => state.user._id);
     const userEmail = useSelector((state: RootState) => state.user.email);
 
     const dispatch = useDispatch();
-    const { request, abort } = useAPIRequest();
+    const { request, isLoading, data } = useAPIRequest();
 
     const addToCart = async ({
         id,
@@ -22,21 +23,22 @@ const useAddToCart = () => {
         price: number;
         quantity: number;
     }) => {
-        const response = await request(
-            URLS.PATCH,
-            URLS.SERVER_BASE,
-            `${URLS.GET_CART}/${userEmail}/${userId}`,
-            {
-                id: id,
-                title: title,
-                price: price,
-                quantity: quantity,
-            }
-        );
-
-        dispatch(loadCart(response.data));
+        if (isLoading) return;
+        request(URLS.PATCH, URLS.SERVER_BASE, `${URLS.GET_CART}/${userEmail}/${userId}`, {
+            id: id,
+            title: title,
+            price: price,
+            quantity: quantity,
+        });
     };
-    return { addToCart, abort };
+
+    useEffect(() => {
+        if (!data) return;
+        const cartData = data.data as ICart;
+        dispatch(loadCart(cartData));
+    }, [data, dispatch]);
+
+    return { addToCart };
 };
 
 export default useAddToCart;

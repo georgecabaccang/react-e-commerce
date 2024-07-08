@@ -2,7 +2,7 @@ import styles from "../CartItemList.module.css";
 import QuantityBox from "../../reusables/inputs/quantity-box/QuantityBox";
 import { IItem } from "../../../store/cartStore/cartSlice";
 import useChangeItemQuantity from "../../../hooks/wrapers/cart/useChangeItemQuantity";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import TAILWIND_CONTANTS from "../../../constants/tailwind";
 import ItemTotal from "./ItemTotal";
 
@@ -17,7 +17,7 @@ export default function Quantity({
     lowerLimit: number;
     higherLimit: number;
 }) {
-    const { newQuantity, changeQuantity, abort } = useChangeItemQuantity();
+    const { newQuantity, changeQuantity } = useChangeItemQuantity();
 
     const changeDBQuantity = useCallback(
         async (quantity: number) => {
@@ -31,11 +31,6 @@ export default function Quantity({
         },
         [changeQuantity, item, lowerLimit, higherLimit]
     );
-
-    useEffect(() => {
-        return () => abort();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     return (
         <div className={styles.cart_item__quantity}>

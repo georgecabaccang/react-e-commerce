@@ -40,7 +40,6 @@ export default function Stars({
     }
 
     for (let j = 0; j < distributedRating.length; j++) {
-        console.log(distributedRating[j]);
         stars.push(
             <svg viewBox="0 0 576 512" width={`${breakPoint}`}>
                 <defs>

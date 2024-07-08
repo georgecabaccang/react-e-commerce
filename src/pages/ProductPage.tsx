@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IProducts } from "./Store";
 import useAPIRequest from "../hooks/services/useAPIRequest";
@@ -9,28 +9,20 @@ export default function ProductPage() {
     const { productId } = useParams();
     const [productDetails, setProductDetails] = useState<IProducts | null>(null);
 
-    const { request, abort } = useAPIRequest();
+    const { request, isLoading, data } = useAPIRequest();
 
-    const loadProduct = useCallback(async () => {
+    useEffect(() => {
         if (productDetails) return;
-        const loadedProduct = await request(
-            URLS.GET,
-            URLS.FAKE_PRODUCTS_BASE,
-            productId!.toString()
-        );
-        setProductDetails(loadedProduct);
-    }, [request, productId, productDetails]);
+        if (isLoading) return;
+        request(URLS.GET, URLS.FAKE_PRODUCTS_BASE, productId!.toString());
+    }, [productDetails, productId, request, isLoading]);
 
     useEffect(() => {
-        loadProduct();
-    }, [loadProduct]);
+        const loaddedProductDetails = data as unknown as IProducts;
+        setProductDetails(loaddedProductDetails);
+    }, [data]);
 
-    useEffect(() => {
-        return () => abort();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    if (!productDetails) return "Loading";
+    if (!productDetails || isLoading) return "Loading";
 
     return <ProductDetails product={productDetails} />;
 }

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import TAILWIND_CONTANTS from "../../constants/tailwind";
 import useAddToCart from "../../hooks/wrapers/cart/useAddToCart";
 import { IProducts } from "../../pages/Store";
@@ -6,7 +5,7 @@ import QuantityBox from "../reusables/inputs/quantity-box/QuantityBox";
 import Product from "./Product";
 
 export default function ProductDetails({ product }: { product: IProducts }) {
-    const { addToCart, abort } = useAddToCart();
+    const { addToCart } = useAddToCart();
 
     function handleAddToCart(quantity: number) {
         addToCart({
@@ -16,11 +15,6 @@ export default function ProductDetails({ product }: { product: IProducts }) {
             quantity: quantity,
         });
     }
-
-    useEffect(() => {
-        return () => abort();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     return (
         <Product productId={product.id} isDetailsPage={true}>

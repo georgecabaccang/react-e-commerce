@@ -5,7 +5,7 @@ export interface IItem extends IProducts {
     quantity: number;
 }
 
-interface ICart {
+export interface ICart {
     _id?: string;
     items: IItem[] | [];
 }
@@ -24,16 +24,21 @@ export const cartSlice = createSlice({
             state.items = action.payload.items;
             localStorage.setItem("cartItems", JSON.stringify(action.payload.items));
         },
-        updateQuantity: (state, action: PayloadAction<{ id: number; quantity: number }>) => {
+        removeItemFromCart: (state, action: PayloadAction<{ id: number }>) => {
             const itemIndex = state.items.findIndex((item) => {
                 return item.id === action.payload.id;
             });
 
-            state.items[itemIndex].quantity = action.payload.quantity;
+            if (itemIndex < 0) return;
+            const itemsCopy = [...state.items];
+            itemsCopy.splice(itemIndex, 1);
+            localStorage.setItem("cartItems", JSON.stringify(itemsCopy));
+
+            state.items = itemsCopy;
         },
         resetCart: () => initialState,
     },
 });
 
-export const { loadCart, updateQuantity, resetCart } = cartSlice.actions;
+export const { loadCart, removeItemFromCart, resetCart } = cartSlice.actions;
 export default cartSlice.reducer;
