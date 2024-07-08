@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import URLS from "../constants/urls";
 import ProductList from "../components/products/ProductList";
 import useAPIRequest from "../hooks/services/useAPIRequest";
@@ -19,21 +19,19 @@ export interface IProducts {
 export default function Store() {
     const [products, setProducts] = useState<IProducts[] | null>(null);
 
-    const { request, abort } = useAPIRequest();
+    const { request, isLoading, data } = useAPIRequest();
 
-    const getProducts = useCallback(async () => {
+    useEffect(() => {
         if (products) return;
-        const loadedProducts = await request(URLS.GET, URLS.FAKE_PRODUCTS_BASE, "/");
-        return setProducts(loadedProducts);
-    }, [request, setProducts, products]);
+        if (isLoading) return;
+        request(URLS.GET, URLS.FAKE_PRODUCTS_BASE, "/");
+    }, [isLoading, products, request]);
 
     useEffect(() => {
-        getProducts();
-    }, [getProducts]);
-
-    useEffect(() => {
-        return () => abort();
-    });
+        if (!data) return;
+        const loadedProducts = data as unknown as IProducts[];
+        setProducts(loadedProducts);
+    }, [data]);
 
     if (!products) return "Loading";
 

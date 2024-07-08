@@ -16,7 +16,7 @@ export default function SignIn() {
     const [passwordShown, setPasswordShown] = useState(false);
     const [disabled, setDisabled] = useState(true);
 
-    const { signInUser, abort } = useSignIn();
+    const { signInUser } = useSignIn();
 
     function handleEmail(value: string) {
         setEmail(value);
@@ -42,11 +42,6 @@ export default function SignIn() {
         }
         setDisabled(true);
     }, [email, password]);
-
-    useEffect(() => {
-        return () => abort();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     return (
         <ContentContainer

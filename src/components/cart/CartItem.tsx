@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "./compound-components/Image";
 import Price from "./compound-components/Price";
 import Quantity from "./compound-components/Quantity";
@@ -10,25 +10,33 @@ import RightPane from "./compound-components/panes/RightPane";
 
 import styles from "./CartItemList.module.css";
 import { IItem } from "../../store/cartStore/cartSlice";
+import Button from "../reusables/buttons/Button";
+import useRemoveFromCart from "../../hooks/wrapers/cart/useRemoveFromCart";
 
 export default function CartItem({ item }: { item: IItem }) {
     const [itemDetails, setItemDetails] = useState<IItem | null>(null);
 
-    const { request, abort } = useAPIRequest();
+    const { request, isLoading, data } = useAPIRequest();
+    const { removeItem } = useRemoveFromCart();
 
-    const getItemDetails = useCallback(async () => {
-        if (itemDetails) return;
-        const response = await request(URLS.GET, URLS.FAKE_PRODUCTS_BASE, item.id.toString());
-        setItemDetails(response);
-    }, [request, item, itemDetails]);
+    const removeFromCart = () => {
+        removeItem(item.id);
+    };
 
     useEffect(() => {
-        getItemDetails();
-        return () => abort();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        if (isLoading) return;
+        if (data) return;
+        request(URLS.GET, URLS.FAKE_PRODUCTS_BASE, item.id.toString());
+    }, [isLoading, item.id, request, data]);
 
-    if (!itemDetails) {
+    useEffect(() => {
+        if (isLoading) return;
+        if (!data) return;
+        const itemDetailsReponse = data as unknown as IItem;
+        setItemDetails(itemDetailsReponse);
+    }, [data, isLoading]);
+
+    if (!itemDetails || isLoading) {
         return "Loading...";
     }
 
@@ -47,6 +55,12 @@ export default function CartItem({ item }: { item: IItem }) {
                     higherLimit={100}
                 />
             </CartItem.RightPane>
+            <Button
+                name="remove_item"
+                type="button"
+                children={"X"}
+                clickFunction={removeFromCart}
+            />
         </div>
     );
 }
