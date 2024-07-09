@@ -11,7 +11,7 @@ const useRemoveFromCart = () => {
     const userEmail = useSelector((state: RootState) => state.user.email);
     const userId = useSelector((state: RootState) => state.user._id);
 
-    const { request, isLoading } = useAPIRequest();
+    const { request, isLoading, data } = useAPIRequest();
     const dispatch = useDispatch();
 
     const removeItem = (id: number) => {
@@ -35,9 +35,10 @@ const useRemoveFromCart = () => {
     useEffect(() => {
         if (isLoading) return;
         if (!itemId) return;
+        if (!data) return;
         setItemId(null);
         dispatch(removeItemFromCart({ id: itemId! }));
-    }, [dispatch, itemId, isLoading]);
+    }, [dispatch, itemId, isLoading, data]);
 
     return { removeItem };
 };
