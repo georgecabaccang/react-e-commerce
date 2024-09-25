@@ -5,12 +5,18 @@
     border-radius: 5px;
     padding: 1rem 2rem;
     width: auto;
-    height: 70vh;
-    height: 70dvh;
+    max-height: 70vh;
+    max-height: 70dvh;
     overflow-y: auto;
     background: white;
     border-radius: 5px;
     box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.057);
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.cart_item__list::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 .cart_item {
@@ -18,7 +24,8 @@
     gap: 1rem;
     padding: 1.3rem 0;
     border-bottom: 1px solid hsla(0, 0%, 0%, 0.07);
-    min-height: 7rem;
+    height: 9rem;
+    
 }
 
 .cart_item__pane_left {
