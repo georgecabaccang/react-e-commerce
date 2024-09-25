@@ -24,11 +24,11 @@ export const cartSlice = createSlice({
             state.items = action.payload.items;
             localStorage.setItem("cartItems", JSON.stringify(action.payload.items));
         },
-        removeItemFromCart: (state, action: PayloadAction<{ id: number }>) => {
+        removeItemFromCart: (state, action: PayloadAction<{ _id: string }>) => {
 
             // STILL FOR TESTING (related to only making a request for update cart if locally saved cart is not equal to state.items)
             // const itemIndex = state.items.findIndex((item) => {
-            //     return item.id === action.payload.id;
+            //     return item._id === action.payload._id;
             // });
 
             // if (itemIndex < 0) return;
@@ -36,7 +36,7 @@ export const cartSlice = createSlice({
             // itemsCopy.splice(itemIndex, 1);
             // localStorage.setItem("cartItems", JSON.stringify(itemsCopy));
 
-            state.items = state.items.filter((item) => item.id !== action.payload.id);
+            state.items = state.items.filter((item) => item._id !== action.payload._id);
         },
         resetCart: () => initialState,
     },

@@ -9,15 +9,13 @@ export default function ProductDetails({ product }: { product: IProducts }) {
 
     function handleAddToCart(quantity: number) {
         addToCart({
-            id: product.id,
-            title: product.title,
-            price: product.price,
+            _id: product._id,
             quantity: quantity,
         });
     }
 
     return (
-        <Product productId={product.id} isDetailsPage={true}>
+        <Product productId={product._id} isDetailsPage={true}>
             <Product.LeftPane isDetailsPage={true}>
                 <Product.Image isDetailsPage={true} source={product.image} title={product.title} />
             </Product.LeftPane>
@@ -25,17 +23,17 @@ export default function ProductDetails({ product }: { product: IProducts }) {
             <Product.RightPane isDetailsPage={true}>
                 <Product.GroupOne isDetailsPage={true}>
                     <Product.Title isDetailsPage={true}>{product.title}</Product.Title>
-                    <Product.Category isDetailsPage={true}>
-                        {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
-                    </Product.Category>
+                    {/* <Product.Category isDetailsPage={true}>
+                        {product?.category.charAt(0).toUpperCase() + product?.category.slice(1)}
+                    </Product.Category> */}
                 </Product.GroupOne>
 
                 <Product.GroupTwo isDetailsPage={true}>
-                    <Product.Price isDetailsPage={true}>{product.price.toFixed(2)}</Product.Price>
+                    <Product.Price isDetailsPage={true}>{product.price}</Product.Price>
                     <Product.Rating
                         isDetailsPage={true}
-                        rate={product.rating.rate}
-                        count={product.rating.count}
+                        rate={product.rating}
+                        count={product.rating}
                     />
                 </Product.GroupTwo>
 

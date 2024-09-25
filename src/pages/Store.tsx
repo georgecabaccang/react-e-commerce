@@ -4,16 +4,14 @@ import ProductList from "../components/products/ProductList";
 import useAPIRequest from "../hooks/services/useAPIRequest";
 
 export interface IProducts {
-    id: number;
+    _id: string;
     title: string;
     price: number;
     category: string;
     description: string;
     image: string;
-    rating: {
-        rate: number;
-        count: number;
-    };
+    rating: number;
+    reviews: number;
 }
 
 export default function Store() {
@@ -24,7 +22,7 @@ export default function Store() {
     useEffect(() => {
         if (products) return;
         if (isLoading) return;
-        request(URLS.GET, URLS.FAKE_PRODUCTS_BASE, "/");
+        request(URLS.GET, URLS.PRODUCTS_BASE, "/");
     }, [isLoading, products, request]);
 
     useEffect(() => {

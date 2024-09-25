@@ -23,7 +23,7 @@ export default function Product({
     isDetailsPage,
 }: {
     children: ReactNode;
-    productId: number;
+    productId: string;
     isDetailsPage: boolean;
 }) {
     const styles = isDetailsPage ? detailStyles : thumbStyles;

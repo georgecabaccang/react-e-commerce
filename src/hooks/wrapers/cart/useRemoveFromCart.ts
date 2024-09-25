@@ -6,7 +6,7 @@ import { removeItemFromCart } from "../../../store/cartStore/cartSlice";
 import { RootState } from "../../../store/store";
 
 const useRemoveFromCart = () => {
-    const [itemId, setItemId] = useState<number | null>(null);
+    const [itemId, setItemId] = useState<string | null>(null);
 
     const userEmail = useSelector((state: RootState) => state.user.email);
     const userId = useSelector((state: RootState) => state.user._id);
@@ -14,8 +14,8 @@ const useRemoveFromCart = () => {
     const { request, isLoading, data } = useAPIRequest();
     const dispatch = useDispatch();
 
-    const removeItem = (id: number) => {
-        setItemId(id);
+    const removeItem = (_id: string) => {
+        setItemId(_id);
     };
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const useRemoveFromCart = () => {
         if (!itemId) return;
         if (!data) return;
         setItemId(null);
-        dispatch(removeItemFromCart({ id: itemId! }));
+        dispatch(removeItemFromCart({ _id: itemId }));
     }, [dispatch, itemId, isLoading, data]);
 
     return { removeItem };

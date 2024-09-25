@@ -23,9 +23,7 @@ export default function Quantity({
         async (quantity: number) => {
             if (quantity < lowerLimit || quantity > higherLimit) return;
             await changeQuantity({
-                id: item.id,
-                title: item.title,
-                price: item.price,
+                _id: item._id,
                 quantity: quantity,
             });
         },
