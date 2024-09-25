@@ -25,16 +25,18 @@ export const cartSlice = createSlice({
             localStorage.setItem("cartItems", JSON.stringify(action.payload.items));
         },
         removeItemFromCart: (state, action: PayloadAction<{ id: number }>) => {
-            const itemIndex = state.items.findIndex((item) => {
-                return item.id === action.payload.id;
-            });
 
-            if (itemIndex < 0) return;
-            const itemsCopy = [...state.items];
-            itemsCopy.splice(itemIndex, 1);
-            localStorage.setItem("cartItems", JSON.stringify(itemsCopy));
+            // STILL FOR TESTING (related to only making a request for update cart if locally saved cart is not equal to state.items)
+            // const itemIndex = state.items.findIndex((item) => {
+            //     return item.id === action.payload.id;
+            // });
 
-            state.items = itemsCopy;
+            // if (itemIndex < 0) return;
+            // const itemsCopy = [...current(state.items)];
+            // itemsCopy.splice(itemIndex, 1);
+            // localStorage.setItem("cartItems", JSON.stringify(itemsCopy));
+
+            state.items = state.items.filter((item) => item.id !== action.payload.id);
         },
         resetCart: () => initialState,
     },

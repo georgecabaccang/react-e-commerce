@@ -55,6 +55,7 @@ const useAPIRequest = <T>() => {
                     url: config.url,
                     data: config.data,
                     signal: abortControllerRef.current.signal,
+                    // withCredentials: true, // set this if you want cookies
                 });
                 setReturnData(response.data);
             } catch (error) {

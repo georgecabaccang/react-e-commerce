@@ -32,5 +32,9 @@ export default function Cart() {
         return "loading pa";
     }
 
+    if (!cartItems.length) {
+        return "Cart is Empty";
+    }
+
     return <CartItemList items={cartItems} />;
 }
