@@ -13,7 +13,7 @@ const updateLocalStorage = (item: IItem) => {
 
         // find the index of item in locally saved cart items
         const indexOfItem = parsedCartItems.findIndex((cartItem) => {
-            return cartItem.id === item.id;
+            return cartItem._id === item._id;
         });
 
         // change quantity of locally saved cart item

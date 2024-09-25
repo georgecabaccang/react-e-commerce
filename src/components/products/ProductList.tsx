@@ -8,20 +8,18 @@ export default function ProductList({ products }: { products: IProducts[] }) {
         <ul className={styles.list}>
             {products.map((product, index) => {
                 return (
-                    <Product key={index} productId={product.id} isDetailsPage={false}>
+                    <Product key={index} productId={product._id} isDetailsPage={false}>
                         <Product.Image
                             isDetailsPage={false}
                             source={product.image}
                             title={product.title}
                         />
                         <Product.Title isDetailsPage={false}>{product.title}</Product.Title>
-                        <Product.Price isDetailsPage={false}>
-                            {product.price.toFixed(2)}
-                        </Product.Price>
+                        <Product.Price isDetailsPage={false}>{product.price}</Product.Price>
                         <Product.Rating
                             isDetailsPage={false}
-                            rate={product.rating.rate}
-                            count={product.rating.count}
+                            rate={product.rating}
+                            count={product.rating}
                         />
                     </Product>
                 );

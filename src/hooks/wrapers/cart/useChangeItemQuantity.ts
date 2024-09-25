@@ -14,28 +14,12 @@ const useChangeItemQuantity = () => {
 
     const { request, isLoading, data } = useAPIRequest();
 
-    async function changeQuantity({
-        id,
-        title,
-        price,
-        quantity,
-    }: {
-        id: number;
-        title: string;
-        price: number;
-        quantity: number;
-    }) {
+    async function changeQuantity({ _id, quantity }: { _id: string; quantity: number }) {
         if (isLoading) return;
         request(
             URLS.PATCH,
             URLS.SERVER_BASE,
-            `${URLS.GET_CART}/${userEmail}/${userId}/${id}/${quantity}`,
-            {
-                id: id,
-                title: title,
-                price: price,
-                quantity: quantity,
-            }
+            `${URLS.GET_CART}/${userEmail}/${userId}/${_id}/${quantity}`
         );
     }
 

@@ -12,24 +12,13 @@ const useAddToCart = () => {
     const dispatch = useDispatch();
     const { request, isLoading, data } = useAPIRequest();
 
-    const addToCart = async ({
-        id,
-        title,
-        price,
-        quantity,
-    }: {
-        id: number;
-        title: string;
-        price: number;
-        quantity: number;
-    }) => {
+    const addToCart = async ({ _id, quantity }: { _id: string; quantity: number }) => {
         if (isLoading) return;
-        request(URLS.PATCH, URLS.SERVER_BASE, `${URLS.GET_CART}/${userEmail}/${userId}`, {
-            id: id,
-            title: title,
-            price: price,
-            quantity: quantity,
-        });
+        request(
+            URLS.PATCH,
+            URLS.SERVER_BASE,
+            `${URLS.GET_CART}/${userEmail}/${userId}/${_id}/${quantity}`
+        );
     };
 
     useEffect(() => {

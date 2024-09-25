@@ -14,7 +14,7 @@ export default function ProductPage() {
     useEffect(() => {
         if (productDetails) return;
         if (isLoading) return;
-        request(URLS.GET, URLS.FAKE_PRODUCTS_BASE, productId!.toString());
+        request(URLS.GET, URLS.PRODUCTS_BASE, productId!.toString());
     }, [productDetails, productId, request, isLoading]);
 
     useEffect(() => {

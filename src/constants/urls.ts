@@ -10,8 +10,8 @@ enum URLS {
     USER_SIGN_UP = "user/sign-up",
     GET_CART = "cart",
 
-    // FAKE PRODUCTS API
-    FAKE_PRODUCTS_BASE = "https://fakestoreapi.com/products",
+    // PRODUCTS
+    PRODUCTS_BASE = "http://localhost:8002/products",
 }
 
 export default URLS;

@@ -20,14 +20,14 @@ export default function CartItem({ item }: { item: IItem }) {
     const { removeItem } = useRemoveFromCart();
 
     const removeFromCart = () => {
-        removeItem(item.id);
+        removeItem(item._id);
     };
 
     useEffect(() => {
         if (isLoading) return;
         if (data) return;
-        request(URLS.GET, URLS.FAKE_PRODUCTS_BASE, item.id.toString());
-    }, [isLoading, item.id, request, data]);
+        request(URLS.GET, URLS.PRODUCTS_BASE, item._id);
+    }, [isLoading, item._id, request, data]);
 
     useEffect(() => {
         if (isLoading) return;
@@ -47,7 +47,7 @@ export default function CartItem({ item }: { item: IItem }) {
             </CartItem.LeftPane>
             <CartItem.RightPane>
                 <CartItem.Title>{itemDetails.title}</CartItem.Title>
-                <CartItem.Price>{itemDetails.price.toFixed(2)}</CartItem.Price>
+                <CartItem.Price>{itemDetails.price}</CartItem.Price>
                 <CartItem.Quantity
                     quantity={item.quantity}
                     item={itemDetails}
