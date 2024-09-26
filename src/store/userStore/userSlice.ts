@@ -5,12 +5,14 @@ export interface IUser {
     email: string;
     password?: string;
     isSignedIn?: boolean;
+    token: string;
 }
 
 const initialState: IUser = {
     _id: "",
     email: "",
     isSignedIn: false,
+    token: "",
 };
 
 export const userSlice = createSlice({
@@ -22,7 +24,10 @@ export const userSlice = createSlice({
             state.email = action.payload.email;
             state.isSignedIn = true;
         },
-        signOut: () => initialState,
+        signOut: () => {
+            localStorage.removeItem("userToken");
+            return initialState;
+        },
     },
 });
 

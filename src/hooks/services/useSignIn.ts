@@ -57,7 +57,7 @@ const useSignIn = () => {
     // END of sign in reuqest -------------------------------------------------------
 
     /* *** STEP 2 *** */
-    // START of getting user's cart -------------------------------------------------
+    // START of getting user's cart and setting token -------------------------------
     useEffect(() => {
         // check if user data is not null or undefined, return if null or undefined
         if (!user) return;
@@ -70,6 +70,11 @@ const useSignIn = () => {
 
         // cast user data to IUser interface
         const userDetails = user?.data as IUser;
+
+        // save token to local storage
+        if (userDetails) {
+            localStorage.setItem("userToken", userDetails.token);
+        }
 
         // make a request to retrieve user's cart data
         cartRequest(
@@ -97,7 +102,7 @@ const useSignIn = () => {
         // save user and cart data to store
         dispatch(userSignedIn(userDetails));
         dispatch(loadCart(cartDetails));
-    }, [user, cart, dispatch, userRequestError, cartRequestError]);
+    }, [cart, dispatch, userRequestError, cartRequestError]);
     // END of storing user and cart data to store -----------------------------------
 
     /* *** STEP 4 *** */
