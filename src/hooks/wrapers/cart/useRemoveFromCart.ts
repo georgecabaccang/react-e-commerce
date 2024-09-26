@@ -10,6 +10,7 @@ const useRemoveFromCart = () => {
 
     const userEmail = useSelector((state: RootState) => state.user.email);
     const userId = useSelector((state: RootState) => state.user._id);
+    const isOpen = useSelector((state: RootState) => state.modal.isOpen);
 
     const { request, isLoading, data } = useAPIRequest();
     const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const useRemoveFromCart = () => {
     useEffect(() => {
         if (isLoading) return;
         if (!itemId) return;
+        if (isOpen) return;
 
         removeItemFromDBCart();
         async function removeItemFromDBCart() {

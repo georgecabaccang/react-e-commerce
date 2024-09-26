@@ -3,6 +3,9 @@ import "./App.css";
 import { Suspense, lazy } from "react";
 import PAGES from "./constants/pages";
 import NavBar from "./components/navigation/navbar/NavBar";
+// import { useSelector } from "react-redux";
+// import { RootState } from "./store/store";
+import Modal from "./components/reusables/modals/RefreshModal";
 // import ProductPage from "./pages/ProductPage";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -14,8 +17,11 @@ const LoggedInRoutes = lazy(() => import("./components/protectedRoutes/LoggedInR
 const Cart = lazy(() => import("./pages/Cart"));
 
 function App() {
+    // const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
+
     return (
         <div className="view_port_container">
+            <Modal />
             <NavBar />
             <div className="content_container">
                 <Suspense fallback={"Loading..."}>
