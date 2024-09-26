@@ -32,10 +32,13 @@ export default function SignIn() {
 
     function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
+
+        // check if all fields are filled in
         if (!email || !password) return console.log("oh no you don't");
         signInUser(email, password);
     }
 
+    // handles the disabling of submit button
     useEffect(() => {
         if (email && password) {
             return setDisabled(false);

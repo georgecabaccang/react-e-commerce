@@ -23,16 +23,24 @@ export default function CartItem({ item }: { item: IItem }) {
         removeItem(item._id);
     };
 
+    // gets products details from database for consistency of products in cart and DB
     useEffect(() => {
+        // return if isLoading is true to avoid multiple requests
         if (isLoading) return;
+        // return if data is already retrieved to avoid multiple requests
         if (data) return;
+        // make a request for product details
         request(URLS.GET, URLS.PRODUCTS_BASE, item._id);
     }, [isLoading, item._id, request, data]);
 
     useEffect(() => {
+        // return if isLoading is true to avoid multiple requests
         if (isLoading) return;
+        // return if data is null or undefined to avoid bugs and error
         if (!data) return;
+        // type cast data for auto completion
         const itemDetailsReponse = data as unknown as IItem;
+        // set item details to state
         setItemDetails(itemDetailsReponse);
     }, [data, isLoading]);
 

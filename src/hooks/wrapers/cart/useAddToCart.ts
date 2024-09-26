@@ -13,7 +13,10 @@ const useAddToCart = () => {
     const { request, isLoading, data } = useAPIRequest();
 
     const addToCart = async ({ _id, quantity }: { _id: string; quantity: number }) => {
+        // reutrn if isLoading is true to avoid multiple requests
         if (isLoading) return;
+
+        // make request to add an item to cart
         request(
             URLS.PATCH,
             URLS.SERVER_BASE,
@@ -24,6 +27,8 @@ const useAddToCart = () => {
     useEffect(() => {
         if (!data) return;
         const cartData = data.data as ICart;
+
+        // update cart in store
         dispatch(loadCart(cartData));
     }, [data, dispatch]);
 

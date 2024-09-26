@@ -9,7 +9,7 @@ const initialState: IModal = {
 
 const modalSlice = createSlice({
     name: "modal",
-    initialState,
+    initialState: initialState,
     reducers: {
         openModal: (state) => {
             state.isOpen = true;

@@ -20,10 +20,16 @@ const useRemoveFromCart = () => {
     };
 
     useEffect(() => {
+        // reutrn isLoading is true to avoid multiple requests
         if (isLoading) return;
+
+        // reutrn if itemId is null or undefined to avoid bugs and errors
         if (!itemId) return;
+
+        // reutrn modal is open to avoid multiple requests, errors and bugs due to expire token
         if (isOpen) return;
 
+        // make a request to remove item from cart
         removeItemFromDBCart();
         async function removeItemFromDBCart() {
             request(
@@ -39,6 +45,8 @@ const useRemoveFromCart = () => {
         if (!itemId) return;
         if (!data) return;
         setItemId(null);
+
+        // remove item from local cart, which is in local storage
         dispatch(removeItemFromCart({ _id: itemId }));
     }, [dispatch, itemId, isLoading, data]);
 
