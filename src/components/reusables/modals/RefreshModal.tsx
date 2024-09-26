@@ -15,10 +15,12 @@ const Modal = () => {
     const dispatch = useDispatch();
 
     function handeRefreshToken() {
+        //  make request to refresh expired token
         request(URLS.POST, URLS.SERVER_BASE, URLS.REFRESH_TOKEN);
     }
 
     function handleSignOut() {
+        // make request to sign out for removal of cookies and tokens
         request(URLS.POST, URLS.SERVER_BASE, URLS.USER_SIGN_OUT);
         dispatch(signOut());
         dispatch(resetCart());

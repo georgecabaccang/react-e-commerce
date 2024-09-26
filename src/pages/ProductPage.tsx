@@ -12,8 +12,13 @@ export default function ProductPage() {
     const { request, isLoading, data } = useAPIRequest();
 
     useEffect(() => {
+        // reutrn if product details are already retrieved to avoid multiple requests
         if (productDetails) return;
+
+        // reutrn isLoading is true to avoid multiple requests
         if (isLoading) return;
+
+        // request for product details
         request(URLS.GET, URLS.PRODUCTS_BASE, productId!.toString());
     }, [productDetails, productId, request, isLoading]);
 

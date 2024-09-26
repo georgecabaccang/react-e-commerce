@@ -17,7 +17,7 @@ const initialState: IUser = {
 
 export const userSlice = createSlice({
     name: "user",
-    initialState,
+    initialState: initialState,
     reducers: {
         userSignedIn: (state, action: PayloadAction<IUser>) => {
             state._id = action.payload._id;

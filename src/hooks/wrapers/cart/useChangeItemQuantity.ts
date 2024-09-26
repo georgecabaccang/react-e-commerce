@@ -15,7 +15,10 @@ const useChangeItemQuantity = () => {
     const { request, isLoading, data } = useAPIRequest();
 
     async function changeQuantity({ _id, quantity }: { _id: string; quantity: number }) {
+        // reutrn if isLoading is true to avoid multiple requests
         if (isLoading) return;
+
+        // make request to change quantity of item in cart that is in the DB
         request(
             URLS.PATCH,
             URLS.SERVER_BASE,
@@ -26,9 +29,11 @@ const useChangeItemQuantity = () => {
     useEffect(() => {
         if (!data) return;
         const itemDate = data.data as IItem;
+
         // update locally saved item
         updateLocalStorage(itemDate);
 
+        // set state for newQuantity to update what is displayed in the quanitty box
         setNewQuantity(itemDate.quantity);
     }, [data]);
 

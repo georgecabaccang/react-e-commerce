@@ -66,6 +66,7 @@ const useAPIRequest = <T>() => {
                 });
                 setReturnData(response.data);
             } catch (error) {
+                abortControllerRef.current.abort();
                 if (error instanceof AxiosError) {
                     if (error.response?.data === "expired_token") {
                         dispatch(openModal());

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, isAction, PayloadAction } from "@reduxjs/toolkit";
 import { IProducts } from "../../pages/Store";
 
 export interface IItem extends IProducts {
@@ -17,7 +17,7 @@ const initialState: ICart = {
 
 export const cartSlice = createSlice({
     name: "cart",
-    initialState,
+    initialState: initialState,
     reducers: {
         loadCart: (state, action: PayloadAction<ICart>) => {
             state._id = action.payload._id;
