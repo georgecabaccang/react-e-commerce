@@ -19,7 +19,9 @@ export const userSlice = createSlice({
     name: "user",
     initialState: initialState,
     reducers: {
-        userSignedIn: (state, action: PayloadAction<IUser>) => {
+        signIn: (state, action: PayloadAction<IUser>) => {
+            console.log(action.payload.token);
+            localStorage.setItem("userToken", action.payload.token);
             state._id = action.payload._id;
             state.email = action.payload.email;
             state.isSignedIn = true;
@@ -31,5 +33,5 @@ export const userSlice = createSlice({
     },
 });
 
-export const { userSignedIn, signOut } = userSlice.actions;
+export const { signIn, signOut } = userSlice.actions;
 export default userSlice.reducer;

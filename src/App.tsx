@@ -20,7 +20,7 @@ const Cart = lazy(() => import("./pages/Cart"));
 
 function App() {
     const [token, setToken] = useState<string | null>(null);
-    const { request, data } = useAPIRequest();
+    // const { request, data } = useAPIRequest();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -31,19 +31,19 @@ function App() {
         loadedToken && setToken(loadedToken);
     }, []);
 
-    useEffect(() => {
-        // if token is available, get a new cookie and token via refreshing
-        if (token) {
-            request(URLS.POST, URLS.SERVER_BASE, URLS.REFRESH_TOKEN);
-        }
-    }, [token]);
+    // useEffect(() => {
+    //     // if token is available, get a new cookie and token via refreshing
+    //     if (token) {
+    //         request(URLS.POST, URLS.SERVER_BASE, URLS.REFRESH_TOKEN);
+    //     }
+    // }, [token]);
 
-    useEffect(() => {
-        // when user data is retrieved, set user state store that user is logged in
-        if (data) {
-            dispatch(userSignedIn(data.data));
-        }
-    }, [data]);
+    // useEffect(() => {
+    //     // when user data is retrieved, set user state store that user is logged in
+    //     if (data) {
+    //         dispatch(userSignedIn(data.data));
+    //     }
+    // }, [data]);
 
     return (
         <div className="view_port_container">

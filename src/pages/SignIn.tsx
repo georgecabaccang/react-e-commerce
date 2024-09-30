@@ -16,7 +16,7 @@ export default function SignIn() {
     const [passwordShown, setPasswordShown] = useState(false);
     const [disabled, setDisabled] = useState(true);
 
-    const { signInUser } = useSignIn();
+    const { signInUser, signInError } = useSignIn();
 
     function handleEmail(value: string) {
         setEmail(value);
@@ -34,7 +34,7 @@ export default function SignIn() {
         event.preventDefault();
 
         // check if all fields are filled in
-        if (!email || !password) return console.log("oh no you don't");
+        if (!email || !password) return console.log("fill_in_inputs");
         signInUser(email, password);
     }
 
