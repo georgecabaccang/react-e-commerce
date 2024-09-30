@@ -54,6 +54,7 @@ export default function SignIn() {
             subheader="Please login to your account"
         >
             <Form onSubmit={handleSubmit}>
+                <Form.Error error={signInError} />
                 <Form.Input
                     name="email"
                     value={email}

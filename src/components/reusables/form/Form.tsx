@@ -1,5 +1,6 @@
 import Button from "../buttons/Button";
 import ButtonGroup from "../buttons/ButtonGroup";
+import Errors from "../errors/Error";
 import Input from "../inputs/Input";
 import styles from "./Form.module.css";
 
@@ -16,6 +17,7 @@ export default function Form({ children, onSubmit }: IForm) {
     );
 }
 
+Form.Error = Errors;
 Form.Input = Input;
 Form.ButtonGroup = ButtonGroup;
 Form.Button = Button;

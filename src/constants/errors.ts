@@ -1,5 +1,5 @@
 enum ERRORS {
-    INVALID_CREDENTIALS = "credentials_mismatch",
+    INVALID_CREDENTIALS = "You have entered an invalid username or password.",
 }
 
 export default ERRORS;
